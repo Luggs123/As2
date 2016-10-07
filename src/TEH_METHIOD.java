@@ -13,7 +13,7 @@ public class TEH_METHIOD extends JFrame {
 	private JTextField descField;
 	private JTextField qtyField;
 	
-	private JTextField cndField;
+	private JTextField cadField;
 	private JTextField usdField;
 	private JTextField eurField;
 	private final ButtonGroup buttonGroup = new ButtonGroup();
@@ -73,9 +73,9 @@ public class TEH_METHIOD extends JFrame {
 		lblUnitPrice.setBounds(6, 131, 77, 16);
 		panel.add(lblUnitPrice);
 		
-		cndField = new JTextField();
-		cndField.setBounds(95, 126, 87, 26);
-		panel.add(cndField);
+		cadField = new JTextField();
+		cadField.setBounds(95, 126, 87, 26);
+		panel.add(cadField);
 		
 		usdField = new JTextField();
 		usdField.setBounds(194, 126, 91, 26);
@@ -85,5 +85,11 @@ public class TEH_METHIOD extends JFrame {
 		eurField.setBounds(297, 126, 92, 26);
 		panel.add(eurField);
 		
+	}
+
+	public static void main(String[] args) {
+		TEH_METHIOD frame = new TEH_METHIOD();
+		frame.setSize(700, 410);
+		frame.setVisible(true);
 	}
 }
