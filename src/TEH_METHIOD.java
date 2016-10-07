@@ -1,43 +1,89 @@
-package test2;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
+import java.awt.GridLayout;
 import javax.swing.JTextField;
+import javax.swing.JRadioButton;
+import javax.swing.ButtonGroup;
 
 public class TEH_METHIOD extends JFrame {
+	
 	// Text fields.
 	private JTextField unitIDField;
-	private JTextField textField;
+	private JTextField descField;
 	private JTextField qtyField;
+	
+	private JTextField cndField;
+	private JTextField usdField;
+	private JTextField eurField;
+	private final ButtonGroup buttonGroup = new ButtonGroup();
 	
 	public TEH_METHIOD() {
 		setTitle("Enter Unit Information");
+		getContentPane().setLayout(new GridLayout(0, 1, 0, 0));
 		
 		JPanel panel = new JPanel();
 		getContentPane().add(panel);
 		panel.setLayout(null);
 		
-		JLabel Description = new JLabel("Unit ID:");
-		Description.setBounds(6, 7, 48, 27);
-		panel.add(Description);
+		JLabel unitIDLabel = new JLabel("Unit ID:");
+		unitIDLabel.setBounds(6, 6, 48, 16);
+		panel.add(unitIDLabel);
 		
 		unitIDField = new JTextField();
-		unitIDField.setBounds(66, 7, 130, 26);
+		unitIDField.setBounds(66, 1, 130, 26);
 		panel.add(unitIDField);
-		unitIDField.setColumns(10);
-		
-		textField = new JTextField();
-		textField.setColumns(10);
-		textField.setBounds(285, 7, 130, 26);
-		panel.add(textField);
 		
 		JLabel descLabel = new JLabel("Description:");
-		descLabel.setBounds(208, 6, 65, 28);
+		descLabel.setBounds(208, 6, 77, 16);
 		panel.add(descLabel);
 		
-		JLabel warehouseLabel = new JLabel("Warehouse:");
-		warehouseLabel.setBounds(6, 75, 77, 16);
-		panel.add(warehouseLabel);
+		descField = new JTextField();
+		descField.setBounds(297, 1, 130, 26);
+		panel.add(descField);
+		
+		JLabel qtyLabel = new JLabel("Qty on hand:");
+		qtyLabel.setBounds(439, 6, 81, 16);
+		panel.add(qtyLabel);
+		
+		qtyField = new JTextField();
+		qtyField.setBounds(532, 1, 130, 26);
+		panel.add(qtyField);
+		
+		JLabel lblWarehouse = new JLabel("Warehouse:");
+		lblWarehouse.setBounds(6, 92, 77, 16);
+		panel.add(lblWarehouse);
+		
+		JRadioButton rdbtnMontreal = new JRadioButton("Montreal");
+		buttonGroup.add(rdbtnMontreal);
+		rdbtnMontreal.setBounds(95, 88, 87, 23);
+		panel.add(rdbtnMontreal);
+		
+		JRadioButton rdbtnNewYork = new JRadioButton("New York");
+		buttonGroup.add(rdbtnNewYork);
+		rdbtnNewYork.setBounds(194, 88, 92, 23);
+		panel.add(rdbtnNewYork);
+		
+		JRadioButton rdbtnBarcelona = new JRadioButton("Barcelona");
+		buttonGroup.add(rdbtnBarcelona);
+		rdbtnBarcelona.setBounds(297, 88, 92, 23);
+		panel.add(rdbtnBarcelona);
+		
+		JLabel lblUnitPrice = new JLabel("Unit Price:");
+		lblUnitPrice.setBounds(6, 131, 77, 16);
+		panel.add(lblUnitPrice);
+		
+		cndField = new JTextField();
+		cndField.setBounds(95, 126, 87, 26);
+		panel.add(cndField);
+		
+		usdField = new JTextField();
+		usdField.setBounds(194, 126, 91, 26);
+		panel.add(usdField);
+		
+		eurField = new JTextField();
+		eurField.setBounds(297, 126, 92, 26);
+		panel.add(eurField);
+		
 	}
 }
