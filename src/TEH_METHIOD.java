@@ -5,6 +5,7 @@ import java.awt.GridLayout;
 import javax.swing.JTextField;
 import javax.swing.JRadioButton;
 import javax.swing.ButtonGroup;
+import javax.swing.JButton;
 
 public class TEH_METHIOD extends JFrame {
 	
@@ -13,7 +14,7 @@ public class TEH_METHIOD extends JFrame {
 	private JTextField descField;
 	private JTextField qtyField;
 	
-	private JTextField cndField;
+	private JTextField cadField;
 	private JTextField usdField;
 	private JTextField eurField;
 	private final ButtonGroup buttonGroup = new ButtonGroup();
@@ -31,23 +32,23 @@ public class TEH_METHIOD extends JFrame {
 		panel.add(unitIDLabel);
 		
 		unitIDField = new JTextField();
-		unitIDField.setBounds(66, 1, 130, 26);
+		unitIDField.setBounds(66, 1, 77, 26);
 		panel.add(unitIDField);
 		
 		JLabel descLabel = new JLabel("Description:");
-		descLabel.setBounds(208, 6, 77, 16);
+		descLabel.setBounds(159, 6, 77, 16);
 		panel.add(descLabel);
 		
 		descField = new JTextField();
-		descField.setBounds(297, 1, 130, 26);
+		descField.setBounds(248, 1, 130, 26);
 		panel.add(descField);
 		
 		JLabel qtyLabel = new JLabel("Qty on hand:");
-		qtyLabel.setBounds(439, 6, 81, 16);
+		qtyLabel.setBounds(390, 6, 81, 16);
 		panel.add(qtyLabel);
 		
 		qtyField = new JTextField();
-		qtyField.setBounds(532, 1, 130, 26);
+		qtyField.setBounds(483, 1, 87, 26);
 		panel.add(qtyField);
 		
 		JLabel lblWarehouse = new JLabel("Warehouse:");
@@ -73,9 +74,9 @@ public class TEH_METHIOD extends JFrame {
 		lblUnitPrice.setBounds(6, 131, 77, 16);
 		panel.add(lblUnitPrice);
 		
-		cndField = new JTextField();
-		cndField.setBounds(95, 126, 87, 26);
-		panel.add(cndField);
+		cadField = new JTextField();
+		cadField.setBounds(95, 126, 87, 26);
+		panel.add(cadField);
 		
 		usdField = new JTextField();
 		usdField.setBounds(194, 126, 91, 26);
@@ -85,5 +86,35 @@ public class TEH_METHIOD extends JFrame {
 		eurField.setBounds(297, 126, 92, 26);
 		panel.add(eurField);
 		
+		JButton btnClear = new JButton("Clear");
+		btnClear.setBounds(115, 179, 77, 29);
+		panel.add(btnClear);
+		
+		JButton btnEdit = new JButton("Edit");
+		btnEdit.setBounds(227, 179, 68, 29);
+		panel.add(btnEdit);
+		
+		JButton btnDelete = new JButton("Delete");
+		btnDelete.setBounds(311, 179, 77, 29);
+		panel.add(btnDelete);
+		
+		JButton btnSearchById = new JButton("Search by ID");
+		btnSearchById.setBounds(98, 220, 117, 29);
+		panel.add(btnSearchById);
+		
+		JButton btnDone = new JButton("Done");
+		btnDone.setBounds(321, 220, 68, 29);
+		panel.add(btnDone);
+		
+		JButton btnMore = new JButton("More");
+		btnMore.setBounds(227, 220, 68, 29);
+		panel.add(btnMore);
+		
+	}
+
+	public static void main(String[] args) {
+		TEH_METHIOD frame = new TEH_METHIOD();
+		frame.setSize(700, 410);
+		frame.setVisible(true);
 	}
 }
