@@ -1,3 +1,4 @@
+package packMain;
 // TODO: Write program function.
 /*** Program Function; 
  *** Creator; Paul Gaudnik, Mark Jarjour, Michael Luger
@@ -14,7 +15,6 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JTextField;
 import javax.swing.JRadioButton;
-import javax.swing.AbstractButton;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 
