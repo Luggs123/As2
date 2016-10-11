@@ -6,17 +6,17 @@ package packMain;
  *** Date Last Modified; October 10th, 2016
  ***/
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JLabel;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JTextField;
-import javax.swing.JRadioButton;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.JTextField;
 
 public class clsMain extends JFrame implements interfaceMain
 {
@@ -139,21 +139,24 @@ public class clsMain extends JFrame implements interfaceMain
 		public void actionPerformed(ActionEvent e) {
 			switch (e.getActionCommand())
 			{
-				case "cad": {
+				case "cad":
+				{
 					cadField.setEditable(true);
 					usdField.setEditable(false);
 					eurField.setEditable(false);
 					break;
 				}
 				
-				case "usd": {
+				case "usd":
+				{
 					cadField.setEditable(false);
 					usdField.setEditable(true);
 					eurField.setEditable(false);
 					break;
 				}
 				
-				case "eur": {
+				case "eur":
+				{
 					cadField.setEditable(false);
 					usdField.setEditable(false);
 					eurField.setEditable(true);
@@ -177,7 +180,8 @@ public class clsMain extends JFrame implements interfaceMain
 		}
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args)
+	{
 		clsMain frame = new clsMain();
 		frame.setSize(700, 410);
 		frame.setVisible(true);
