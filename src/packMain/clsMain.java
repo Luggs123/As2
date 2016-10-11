@@ -171,12 +171,12 @@ public class clsMain extends JFrame implements interfaceMain
 	{
 		public void actionPerformed(ActionEvent e)
 		{
-			unitIDField.setText(emptyStr);
-			descField.setText(emptyStr);
-			qtyField.setText(emptyStr);
-			cadField.setText(emptyStr);
-			usdField.setText(emptyStr);
-			eurField.setText(emptyStr);
+			unitIDField.setText(EMPTY_STR);
+			descField.setText(EMPTY_STR);
+			qtyField.setText(EMPTY_STR);
+			cadField.setText(EMPTY_STR);
+			usdField.setText(EMPTY_STR);
+			eurField.setText(EMPTY_STR);
 		}
 	}
 

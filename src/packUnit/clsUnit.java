@@ -1,24 +1,52 @@
 package packUnit;
 
+import packMain.interfaceMain;
 
-public class clsUnit
+public class clsUnit implements interfaceMain
 {
-    protected float unitPrice;
+    protected double localPrice;
+    protected String warehouseCity;
+    protected double cadPrice;
     protected int qtyOnHand;
     protected String itemDsc;
-    protected String warehouseCity;
-   
+    protected double totalPrice;
     
-    public double computeTotal(float unitPrice, int qtyOnHand)
+    public double computeCadPrice(float localPrice, String warehourseCity)
     {
-        this.unitPrice = unitPrice;
-        this.qtyOnHand = qtyOnHand;
-        double cadTotal = (unitPrice * qtyOnHand);
-        
-        /* Computes the total cost of a Unit by multiplying the quantity on hand 
-           in warehouse by the unit price(in CAD). 
-        */ 
-        return cadTotal;
+    	switch (warehouseCity.toLowerCase())
+    	{
+    	case "montreal":
+    		{
+    			return CAN_CAN * localPrice;
+    		}
+    	case "new york":
+    		{
+    			return USD_CAN * localPrice;
+    		}
+    	case "barcelona":
+    		{
+    			return EUR_CAN * localPrice;
+    		}
+    	default: 
+    		{
+    			return localPrice;
+    		}
+    	}
     }
+    
+    public double computeTotal(double cadPrice, int qtyOnHand)
+    {
+        return cadPrice * qtyOnHand;
+    }
+
+	public clsUnit(float localPrice, String warehouseCity, int qtyOnHand, String itemDsc) {
+		super();
+		this.localPrice = localPrice;
+		this.warehouseCity = warehouseCity;
+		this.qtyOnHand = qtyOnHand;
+		this.itemDsc = itemDsc;
+		this.cadPrice = computeCadPrice(localPrice, warehouseCity);
+		this.totalPrice = computeTotal(cadPrice, qtyOnHand);
+	}
     
 }
