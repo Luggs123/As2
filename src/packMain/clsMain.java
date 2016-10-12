@@ -6,6 +6,11 @@ package packMain;
  *** Date Last Modified; October 10th, 2016
  ***/
 
+import packUnit.*;
+
+import java.util.Map;
+import java.util.TreeMap;
+
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,6 +19,7 @@ import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
@@ -21,6 +27,7 @@ import javax.swing.JTextField;
 public class clsMain extends JFrame implements interfaceMain
 {
 	private static final long serialVersionUID = -1784204695438064302L;
+	private static TreeMap<Integer, clsUnit> unitMap = new TreeMap<>();
 
 	// Text fields.
 	private JTextField unitIDField;
@@ -122,6 +129,7 @@ public class clsMain extends JFrame implements interfaceMain
 
 		JButton btnSearchById = new JButton("Search by ID");
 		btnSearchById.setBounds(98, 220, 117, 29);
+		btnSearchById.addActionListener(new btnListenerSEARCH());
 		panel.add(btnSearchById);
 
 		JButton btnDone = new JButton("Done");
@@ -177,6 +185,50 @@ public class clsMain extends JFrame implements interfaceMain
 			cadField.setText(EMPTY_STR);
 			usdField.setText(EMPTY_STR);
 			eurField.setText(EMPTY_STR);
+		}
+	}
+	
+	class btnListenerSEARCH implements ActionListener // Searches for and displays the unit based on the ID, if it exists.
+	{
+		public void actionPerformed(ActionEvent e)
+		{
+			int searchUnit = NUM_0;
+			
+			try
+			{  
+				// Parse text field.
+				searchUnit = Integer.parseInt(unitIDField.getText());
+			}
+			
+			catch (NumberFormatException nfe)
+			{ 
+				// If an error is caught then throw an error dialog.
+				JOptionPane.showMessageDialog(null, "Please enter a valid \"Unit ID\" parameter." , "Input Error", JOptionPane.ERROR_MESSAGE);
+				return;
+			}
+			
+			
+			for (Map.Entry<Integer, clsUnit> map : unitMap.entrySet())
+			{
+				if (searchUnit == map.getKey())
+				{
+					// TODO: Disable every button and enable the edit and delete buttons.
+					// Display unit info and disable text fields.
+					descField.setEditable(false);
+					qtyField.setEditable(false);
+					cadField.setEditable(false);
+					usdField.setEditable(false);
+					eurField.setEditable(false);
+					
+					descField.setText(map.getValue().getItemDsc());
+					qtyField.setText(Integer.toString(map.getValue().getQtyOnHand()));
+					cadField.setText(Double.toString(map.getValue().getCadPrice()));
+					return;
+				}
+			}
+			
+			// If the unit doesn't exist then throw an error dialog.
+			JOptionPane.showMessageDialog(null, "No unit with that ID was found in the database.", "ID Does Not Exist", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 
