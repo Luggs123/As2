@@ -121,10 +121,12 @@ public class clsMain extends JFrame implements interfaceMain
 
 		JButton btnEdit = new JButton("Edit");
 		btnEdit.setBounds(227, 179, 68, 29);
+		btnEdit.setEnabled(false);
 		panel.add(btnEdit);
 
 		JButton btnDelete = new JButton("Delete");
 		btnDelete.setBounds(311, 179, 77, 29);
+		btnDelete.setEnabled(false);
 		panel.add(btnDelete);
 
 		JButton btnSearchById = new JButton("Search by ID");
