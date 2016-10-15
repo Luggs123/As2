@@ -1,6 +1,6 @@
 package packMain;
 // TODO: Write program function.
-/*** Program Function; 
+/*** Program Function;
  *** Creator; Paul Gaudnik, Mark Jarjour, Michael Luger
  *** Submission Date; October 10th, 2016
  *** Date Last Modified; October 10th, 2016
@@ -37,10 +37,10 @@ public class clsMain extends JFrame implements interfaceMain
 	private JTextField cadField;
 	private JTextField usdField;
 	private JTextField eurField;
-	
+
 	private final ButtonGroup buttonGroup = new ButtonGroup();
 
-	public clsMain() 
+	public clsMain()
 	{
 		setTitle("Enter Unit Information");
 		getContentPane().setLayout(new GridLayout(0, 1, 0, 0));
@@ -143,7 +143,7 @@ public class clsMain extends JFrame implements interfaceMain
 		panel.add(btnMore);
 
 	}
-	
+
 	class rdbtnListener implements ActionListener // Open and close text fields based on the location selected.
 	{
 		public void actionPerformed(ActionEvent e) {
@@ -156,7 +156,7 @@ public class clsMain extends JFrame implements interfaceMain
 					eurField.setEditable(false);
 					break;
 				}
-				
+
 				case "usd":
 				{
 					cadField.setEditable(false);
@@ -164,7 +164,7 @@ public class clsMain extends JFrame implements interfaceMain
 					eurField.setEditable(false);
 					break;
 				}
-				
+
 				case "eur":
 				{
 					cadField.setEditable(false);
@@ -174,9 +174,9 @@ public class clsMain extends JFrame implements interfaceMain
 				}
 			}
 		}
-		
+
 	}
-	
+
 	class btnListenerCLEAR implements ActionListener // Clears text fields.
 	{
 		public void actionPerformed(ActionEvent e)
@@ -189,27 +189,27 @@ public class clsMain extends JFrame implements interfaceMain
 			eurField.setText(EMPTY_STR);
 		}
 	}
-	
+
 	class btnListenerSEARCH implements ActionListener // Searches for and displays the unit based on the ID, if it exists.
 	{
 		public void actionPerformed(ActionEvent e)
 		{
 			int searchUnit = NUM_0;
-			
+
 			try
-			{  
+			{
 				// Parse text field.
 				searchUnit = Integer.parseInt(unitIDField.getText());
 			}
-			
+
 			catch (NumberFormatException nfe)
-			{ 
+			{
 				// If an error is caught then throw an error dialog.
 				JOptionPane.showMessageDialog(null, "Please enter a valid \"Unit ID\" parameter." , "Input Error", JOptionPane.ERROR_MESSAGE);
 				return;
 			}
-			
-			
+
+
 			for (Map.Entry<Integer, clsUnit> map : unitMap.entrySet())
 			{
 				if (searchUnit == map.getKey())
@@ -221,14 +221,14 @@ public class clsMain extends JFrame implements interfaceMain
 					cadField.setEditable(false);
 					usdField.setEditable(false);
 					eurField.setEditable(false);
-					
+
 					descField.setText(map.getValue().getItemDsc());
 					qtyField.setText(Integer.toString(map.getValue().getQtyOnHand()));
 					cadField.setText(Double.toString(map.getValue().getCadPrice()));
 					return;
 				}
 			}
-			
+
 			// If the unit doesn't exist then throw an error dialog.
 			JOptionPane.showMessageDialog(null, "No unit with that ID was found in the database.", "ID Does Not Exist", JOptionPane.ERROR_MESSAGE);
 		}
