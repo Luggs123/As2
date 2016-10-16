@@ -15,22 +15,22 @@ public class clsUnit implements interfaceMain
 	{
 		switch (warehouseCity.toLowerCase())
 		{
-		case "montreal":
-		{
-			return CAN_CAN * localPrice;
-		}
-		case "new york":
-		{
-			return USD_CAN * localPrice;
-		}
-		case "barcelona":
-		{
-			return EUR_CAN * localPrice;
-		}
-		default: 
-		{
-			return localPrice;
-		}
+			case "montreal":
+			{
+				return CAN_CAN * localPrice;
+			}
+			case "new york":
+			{
+				return USD_CAN * localPrice;
+			}
+			case "barcelona":
+			{
+				return EUR_CAN * localPrice;
+			}
+			default: 
+			{
+				return localPrice;
+			}
 		}
 	}
 
@@ -39,8 +39,8 @@ public class clsUnit implements interfaceMain
 		return cadPrice * qtyOnHand;
 	}
 
-	public clsUnit(float localPrice, String warehouseCity, int qtyOnHand, String itemDsc) {
-		super();
+	public clsUnit(float localPrice, String warehouseCity, int qtyOnHand, String itemDsc)
+	{
 		this.localPrice = localPrice;
 		this.warehouseCity = warehouseCity;
 		this.qtyOnHand = qtyOnHand;

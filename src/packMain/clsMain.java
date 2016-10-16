@@ -37,6 +37,14 @@ public class clsMain extends JFrame implements interfaceMain
 	private JTextField cadField;
 	private JTextField usdField;
 	private JTextField eurField;
+	
+	// Buttons.
+	final JButton btnClear = new JButton("Clear");
+	final JButton btnEdit = new JButton("Edit");
+	final JButton btnDelete = new JButton("Delete");
+	final JButton btnSearchById = new JButton("Search by ID");
+	final JButton btnDone = new JButton("Done");
+	final JButton btnMore = new JButton("More");
 
 	private final ButtonGroup buttonGroup = new ButtonGroup();
 
@@ -49,6 +57,7 @@ public class clsMain extends JFrame implements interfaceMain
 		getContentPane().add(panel);
 		panel.setLayout(null);
 
+		// Unit labels and text fields.
 		JLabel unitIDLabel = new JLabel("Unit ID:");
 		unitIDLabel.setBounds(6, 6, 48, 16);
 		panel.add(unitIDLabel);
@@ -73,6 +82,7 @@ public class clsMain extends JFrame implements interfaceMain
 		qtyField.setBounds(483, 1, 87, 26);
 		panel.add(qtyField);
 
+		// Warehouse radio buttons.
 		JLabel lblWarehouse = new JLabel("Warehouse:");
 		lblWarehouse.setBounds(6, 92, 77, 16);
 		panel.add(lblWarehouse);
@@ -102,6 +112,7 @@ public class clsMain extends JFrame implements interfaceMain
 		lblUnitPrice.setBounds(6, 131, 77, 16);
 		panel.add(lblUnitPrice);
 
+		// Currency text fields.
 		cadField = new JTextField();
 		cadField.setBounds(95, 126, 87, 26);
 		panel.add(cadField);
@@ -114,31 +125,26 @@ public class clsMain extends JFrame implements interfaceMain
 		eurField.setBounds(297, 126, 92, 26);
 		panel.add(eurField);
 
-		JButton btnClear = new JButton("Clear");
+		// Buttons.
 		btnClear.setBounds(115, 179, 77, 29);
 		btnClear.addActionListener(new btnListenerCLEAR());
 		panel.add(btnClear);
 
-		JButton btnEdit = new JButton("Edit");
 		btnEdit.setBounds(227, 179, 68, 29);
 		btnEdit.setEnabled(false);
 		panel.add(btnEdit);
 
-		JButton btnDelete = new JButton("Delete");
 		btnDelete.setBounds(311, 179, 77, 29);
 		btnDelete.setEnabled(false);
 		panel.add(btnDelete);
 
-		JButton btnSearchById = new JButton("Search by ID");
 		btnSearchById.setBounds(98, 220, 117, 29);
 		btnSearchById.addActionListener(new btnListenerSEARCH());
 		panel.add(btnSearchById);
 
-		JButton btnDone = new JButton("Done");
 		btnDone.setBounds(321, 220, 68, 29);
 		panel.add(btnDone);
 
-		JButton btnMore = new JButton("More");
 		btnMore.setBounds(227, 220, 68, 29);
 		panel.add(btnMore);
 
@@ -196,25 +202,12 @@ public class clsMain extends JFrame implements interfaceMain
 		{
 			int searchUnit = NUM_0;
 
-			try
-			{
-				// Parse text field.
-				searchUnit = Integer.parseInt(unitIDField.getText());
-			}
-
-			catch (NumberFormatException nfe)
-			{
-				// If an error is caught then throw an error dialog.
-				JOptionPane.showMessageDialog(null, "Please enter a valid \"Unit ID\" parameter." , "Input Error", JOptionPane.ERROR_MESSAGE);
-				return;
-			}
-
+			if (!catchNumerFormatError(unitIDField, "Please enter a valid \"Unit ID\" parameter.")) { return; }
 
 			for (Map.Entry<Integer, clsUnit> map : unitMap.entrySet())
 			{
 				if (searchUnit == map.getKey())
 				{
-					// TODO: Disable every button and enable the edit and delete buttons.
 					// Display unit info and disable text fields.
 					descField.setEditable(false);
 					qtyField.setEditable(false);
@@ -225,6 +218,15 @@ public class clsMain extends JFrame implements interfaceMain
 					descField.setText(map.getValue().getItemDsc());
 					qtyField.setText(Integer.toString(map.getValue().getQtyOnHand()));
 					cadField.setText(Double.toString(map.getValue().getCadPrice()));
+					
+					// Disable buttons.
+					btnClear.setEnabled(false);
+					btnEdit.setEnabled(true);
+					btnDelete.setEnabled(true);
+					btnSearchById.setEnabled(false);
+					btnDone.setEnabled(false);
+					btnMore.setEnabled(false);
+
 					return;
 				}
 			}
@@ -234,10 +236,43 @@ public class clsMain extends JFrame implements interfaceMain
 		}
 	}
 
+	class btnListenerMORE implements ActionListener // Searches for and displays the unit based on the ID, if it exists.
+	{
+		public void actionPerformed(ActionEvent e)
+		{
+			
+			
+			// Clear text fields.
+			btnClear.doClick();
+		}
+	}
+
 	public static void main(String[] args)
 	{
 		clsMain frame = new clsMain();
 		frame.setSize(700, 410);
+		frame.setResizable(false);
+		frame.setLocationRelativeTo(null);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
+	}
+
+	// Function used for catching errors involving incorrect data being inputed into text fields.
+	public static Boolean catchNumerFormatError(JTextField textfield, String errorMessage)
+	{
+		try
+		{
+			// Parse text field.
+			Integer.parseInt(textfield.getText());
+		}
+
+		catch (NumberFormatException nfe)
+		{
+			// If an error is caught then throw an error dialog.
+			JOptionPane.showMessageDialog(null, errorMessage , "Input Error", JOptionPane.ERROR_MESSAGE);
+			return false;
+		}
+
+		return true;
 	}
 }
