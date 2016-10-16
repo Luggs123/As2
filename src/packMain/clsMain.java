@@ -218,7 +218,7 @@ public class clsMain extends JFrame implements interfaceMain
 					cadField.setText(Double.toString(Math.round(map.getValue().getCadPrice() * 100.0) / 100.0)); // Round price because float.
 					
 					rdbtnMontreal.doClick();
-					modifyMode(true);
+					viewMode(true);
 					return;
 				}
 			}
@@ -232,7 +232,7 @@ public class clsMain extends JFrame implements interfaceMain
 	{
 		public void actionPerformed(ActionEvent e)
 		{
-			modifyMode(false);
+			viewMode(false);
 		}
 			
 	}
@@ -243,7 +243,7 @@ public class clsMain extends JFrame implements interfaceMain
 		{
 			unitMap.remove(Integer.parseInt(unitIDField.getText()));
 			
-			modifyMode(false);
+			viewMode(false);
 			btnClear.doClick();
 		}
 			
@@ -260,7 +260,13 @@ public class clsMain extends JFrame implements interfaceMain
 
 			if (unitID < 100 || unitID > 999)
 			{
-				JOptionPane.showMessageDialog(null, "Unit ID must be between 100 and 999", "Unit ID Error", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null, "Unit ID must be between 100 and 999.", "Unit ID Error", JOptionPane.ERROR_MESSAGE);
+				return;
+			}
+			
+			if (descField.getText().length() > 10)
+			{
+				JOptionPane.showMessageDialog(null, "Item description can only be 10 characters or less. (Your input contained " + descField.getText().length() + ")", "Item Description Error", JOptionPane.ERROR_MESSAGE);
 				return;
 			}
 			
@@ -355,7 +361,7 @@ public class clsMain extends JFrame implements interfaceMain
 	}
 	
 	// Toggles whether the buttons and text fields are usable.
-	public static void modifyMode(Boolean enable)
+	public static void viewMode(Boolean enable)
 	{
 		rdbtnMontreal.setEnabled(!enable);
 		rdbtnNewYork.setEnabled(!enable);
