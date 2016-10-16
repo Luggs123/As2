@@ -2,7 +2,7 @@ package packUnit;
 
 import packMain.interfaceMain;
 
-public class clsUnit implements interfaceMain
+public class clsUnit implements interfaceMain, Comparable<clsUnit>
 {
 	private float localPrice;
 	private String warehouseCity;
@@ -73,6 +73,14 @@ public class clsUnit implements interfaceMain
 	public double getTotalPrice()
 	{
 		return totalPrice;
+	}
+
+	@Override
+	public int compareTo(clsUnit o) 
+	{
+		if (this.getCadPrice() > o.getCadPrice()) { return 1; }
+		else if (this.getCadPrice() < o.getCadPrice()) { return -1; }
+		else { return 0; }
 	}
 
 }

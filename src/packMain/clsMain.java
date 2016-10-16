@@ -8,6 +8,7 @@ package packMain;
 
 import packUnit.*;
 
+import java.util.Comparator;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -205,7 +206,7 @@ public class clsMain extends JFrame implements interfaceMain
 		public void actionPerformed(ActionEvent e)
 		{
 			if (!catchNumberFormatError(unitIDField, "Please enter a valid \"Unit ID\" parameter.")) { return; }
-			
+
 			int searchUnit = Integer.parseInt(unitIDField.getText());
 
 			for (Map.Entry<Integer, clsUnit> map : unitMap.entrySet())
@@ -216,7 +217,7 @@ public class clsMain extends JFrame implements interfaceMain
 					descField.setText(map.getValue().getItemDsc());
 					qtyField.setText(Integer.toString(map.getValue().getQtyOnHand()));
 					cadField.setText(Float.toString((float) (Math.round(map.getValue().getCadPrice() * NUM_100) / NUM_100))); // Round price because float.
-					
+
 					rdbtnMontreal.doClick();
 					viewMode(true);
 					return;
@@ -227,26 +228,26 @@ public class clsMain extends JFrame implements interfaceMain
 			JOptionPane.showMessageDialog(null, "No unit with that ID was found in the database.", "ID Does Not Exist", JOptionPane.ERROR_MESSAGE);
 		}
 	}
-	
+
 	class btnListenerEDIT implements ActionListener // Lets the user edit the unit found with "Search by ID".
 	{
 		public void actionPerformed(ActionEvent e)
 		{
 			viewMode(false);
 		}
-			
+
 	}
-	
+
 	class btnListenerDELETE implements ActionListener // Lets the user remove the unit found with "Search by ID" from the database.
 	{
 		public void actionPerformed(ActionEvent e)
 		{
 			unitMap.remove(Integer.parseInt(unitIDField.getText()));
-			
+
 			viewMode(false);
 			btnClear.doClick();
 		}
-			
+
 	}
 
 	class btnListenerMORE implements ActionListener // Searches for and displays the unit based on the ID, if it exists.
@@ -264,13 +265,13 @@ public class clsMain extends JFrame implements interfaceMain
 				JOptionPane.showMessageDialog(null, "Unit ID must be between 100 and 999.", "Unit ID Error", JOptionPane.ERROR_MESSAGE);
 				return;
 			}
-			
+
 			if (descField.getText().length() > 10)
 			{
 				JOptionPane.showMessageDialog(null, "Item description can only be 10 characters or less. (Your input contained " + descField.getText().length() + ")", "Item Description Error", JOptionPane.ERROR_MESSAGE);
 				return;
 			}
-			
+
 			if (qty < NUM_0 || qty > 9999)
 			{
 				JOptionPane.showMessageDialog(null, "Qty on Hand must be between 0 and 9999.", "Quantity Error", JOptionPane.ERROR_MESSAGE);
@@ -297,7 +298,7 @@ public class clsMain extends JFrame implements interfaceMain
 				if (!catchNumberFormatError(cadField, "Please enter a valid \"Unit Price\" parameter.", true)) { return; }
 				unitPrice = Float.parseFloat(cadField.getText());
 			}
-			
+
 			if (unitPrice <= NUM_0)
 			{
 				JOptionPane.showMessageDialog(null, "Unit Price must be a positive value.", "Unit Price Error", JOptionPane.ERROR_MESSAGE);
@@ -307,9 +308,19 @@ public class clsMain extends JFrame implements interfaceMain
 			// TODO: Make the map sort by unit price.
 			// Add information to map.
 			unitMap.put(unitID, new clsUnit(unitPrice, warehouseCity, qty, descField.getText()));
-			
+
 			// Clear text fields.
 			btnClear.doClick();
+		}
+	}
+	
+	class btnListenerDONE implements ActionListener
+	{
+		@Override
+		public void actionPerformed(ActionEvent e) 
+		{
+			unitMap = sortByValues(unitMap);
+			// TODO Auto-generated method stub
 		}
 	}
 
@@ -342,7 +353,7 @@ public class clsMain extends JFrame implements interfaceMain
 
 		return true;
 	}
-	
+
 	// Variant of the previous function for floats.
 	public static Boolean catchNumberFormatError(JTextField textfield, String errorMessage, Boolean isFloat)
 	{
@@ -361,14 +372,14 @@ public class clsMain extends JFrame implements interfaceMain
 
 		return true;
 	}
-	
+
 	// Toggles whether the buttons and text fields are usable.
 	public static void viewMode(Boolean enable)
 	{
 		rdbtnMontreal.setEnabled(!enable);
 		rdbtnNewYork.setEnabled(!enable);
 		rdbtnBarcelona.setEnabled(!enable);
-		
+
 		unitIDField.setEditable(!enable);
 		descField.setEditable(!enable);
 		qtyField.setEditable(!enable);
@@ -380,7 +391,7 @@ public class clsMain extends JFrame implements interfaceMain
 		btnSearchById.setEnabled(!enable);
 		btnDone.setEnabled(!enable);
 		btnMore.setEnabled(!enable);
-		
+
 		// This prevents all three local price fields from being opened.
 		if (enable)
 		{
@@ -394,5 +405,21 @@ public class clsMain extends JFrame implements interfaceMain
 			usdField.setEditable(false);
 			eurField.setEditable(false);
 		}
+	}
+
+	public static <K, V extends Comparable<V>> Map<K, V> sortByValues(final Map<K, V> map) 
+	{
+		Comparator<K> valueComparator =  new Comparator<K>() 
+		{
+			public int compare(K k1, K k2) 
+			{
+				int compare = map.get(k2).compareTo(map.get(k1));
+				if (compare == 0) return 1;
+				else return compare;
+			}
+		};
+		Map<K, V> sortedByValues = new TreeMap<K, V>(valueComparator);
+		sortedByValues.putAll(map);
+		return sortedByValues;
 	}
 }
