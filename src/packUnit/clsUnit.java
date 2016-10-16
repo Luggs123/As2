@@ -4,28 +4,24 @@ import packMain.interfaceMain;
 
 public class clsUnit implements interfaceMain
 {
-	private double localPrice;
+	private float localPrice;
 	private String warehouseCity;
-	private double cadPrice;
+	private float cadPrice;
 	private int qtyOnHand;
 	private String itemDsc;
-	private double totalPrice;
+	private float totalPrice;
 
-	public double computeCadPrice(float localPrice, String warehourseCity)
+	public float computeCadPrice(float localPrice, String warehourseCity)
 	{
 		switch (warehouseCity.toLowerCase())
 		{
-			case "montreal":
-			{
-				return CAN_CAN * localPrice;
-			}
 			case "new york":
 			{
-				return USD_CAN * localPrice;
+				return (float) (USD_CAN * localPrice);
 			}
 			case "barcelona":
 			{
-				return EUR_CAN * localPrice;
+				return (float) (EUR_CAN * localPrice);
 			}
 			default: 
 			{
@@ -34,9 +30,9 @@ public class clsUnit implements interfaceMain
 		}
 	}
 
-	public double computeTotal(double cadPrice, int qtyOnHand)
+	public float computeTotal(float cadPrice, int qtyOnHand)
 	{
-		return cadPrice * qtyOnHand;
+		return (float) (cadPrice * qtyOnHand);
 	}
 
 	public clsUnit(float localPrice, String warehouseCity, int qtyOnHand, String itemDsc)

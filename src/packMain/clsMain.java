@@ -215,7 +215,7 @@ public class clsMain extends JFrame implements interfaceMain
 					// Display unit info and disable text fields.
 					descField.setText(map.getValue().getItemDsc());
 					qtyField.setText(Integer.toString(map.getValue().getQtyOnHand()));
-					cadField.setText(Double.toString(Math.round(map.getValue().getCadPrice() * 100.0) / 100.0)); // Round price because float.
+					cadField.setText(Float.toString((float) (Math.round(map.getValue().getCadPrice() * NUM_100) / NUM_100))); // Round price because float.
 					
 					rdbtnMontreal.doClick();
 					viewMode(true);
@@ -257,8 +257,9 @@ public class clsMain extends JFrame implements interfaceMain
 			if (!catchNumberFormatError(unitIDField, "Please enter a valid \"Unit ID\" parameter.")) { return; }
 			if (!catchNumberFormatError(qtyField, "Please enter a valid \"Qty on Hand\" parameter.")) { return; }
 			int unitID = Integer.parseInt(unitIDField.getText());
+			int qty = Integer.parseInt(qtyField.getText());
 
-			if (unitID < 100 || unitID > 999)
+			if (unitID < NUM_100 || unitID > 999)
 			{
 				JOptionPane.showMessageDialog(null, "Unit ID must be between 100 and 999.", "Unit ID Error", JOptionPane.ERROR_MESSAGE);
 				return;
@@ -270,7 +271,7 @@ public class clsMain extends JFrame implements interfaceMain
 				return;
 			}
 			
-			if (Integer.parseInt(qtyField.getText()) < NUM_0 || Integer.parseInt(qtyField.getText()) > 9999)
+			if (qty < NUM_0 || qty > 9999)
 			{
 				JOptionPane.showMessageDialog(null, "Qty on Hand must be between 0 and 9999.", "Quantity Error", JOptionPane.ERROR_MESSAGE);
 				return;
@@ -305,7 +306,7 @@ public class clsMain extends JFrame implements interfaceMain
 
 			// TODO: Make the map sort by unit price.
 			// Add information to map.
-			unitMap.put(unitID, new clsUnit(unitPrice, warehouseCity, Integer.parseInt(qtyField.getText()), descField.getText()));
+			unitMap.put(unitID, new clsUnit(unitPrice, warehouseCity, qty, descField.getText()));
 			
 			// Clear text fields.
 			btnClear.doClick();
@@ -315,6 +316,7 @@ public class clsMain extends JFrame implements interfaceMain
 	public static void main(String[] args)
 	{
 		clsMain frame = new clsMain();
+		rdbtnMontreal.doClick();
 		frame.setSize(700, 410);
 		frame.setResizable(false);
 		frame.setLocationRelativeTo(null);
