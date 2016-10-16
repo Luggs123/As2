@@ -319,7 +319,7 @@ public class clsMain extends JFrame implements interfaceMain
 		@Override
 		public void actionPerformed(ActionEvent e) 
 		{
-			unitMap = sortByValues(unitMap);
+			unitMap = new TreeMap<Integer, clsUnit>(sortByValues(unitMap));
 			// TODO Auto-generated method stub
 		}
 	}
