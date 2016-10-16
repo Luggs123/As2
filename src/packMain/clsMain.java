@@ -37,7 +37,7 @@ public class clsMain extends JFrame implements interfaceMain
 	private JTextField cadField;
 	private JTextField usdField;
 	private JTextField eurField;
-	
+
 	// Buttons.
 	final JButton btnClear = new JButton("Clear");
 	final JButton btnEdit = new JButton("Edit");
@@ -45,6 +45,10 @@ public class clsMain extends JFrame implements interfaceMain
 	final JButton btnSearchById = new JButton("Search by ID");
 	final JButton btnDone = new JButton("Done");
 	final JButton btnMore = new JButton("More");
+
+	JRadioButton rdbtnMontreal = new JRadioButton("Montreal");
+	JRadioButton rdbtnNewYork = new JRadioButton("New York");
+	JRadioButton rdbtnBarcelona = new JRadioButton("Barcelona");
 
 	private final ButtonGroup buttonGroup = new ButtonGroup();
 
@@ -87,21 +91,18 @@ public class clsMain extends JFrame implements interfaceMain
 		lblWarehouse.setBounds(6, 92, 77, 16);
 		panel.add(lblWarehouse);
 
-		JRadioButton rdbtnMontreal = new JRadioButton("Montreal");
 		buttonGroup.add(rdbtnMontreal);
 		rdbtnMontreal.setBounds(95, 88, 87, 23);
 		rdbtnMontreal.setActionCommand("cad");
 		rdbtnMontreal.addActionListener(new rdbtnListener());
 		panel.add(rdbtnMontreal);
 
-		JRadioButton rdbtnNewYork = new JRadioButton("New York");
 		buttonGroup.add(rdbtnNewYork);
 		rdbtnNewYork.setBounds(194, 88, 92, 23);
 		rdbtnNewYork.setActionCommand("usd");
 		rdbtnNewYork.addActionListener(new rdbtnListener());
 		panel.add(rdbtnNewYork);
 
-		JRadioButton rdbtnBarcelona = new JRadioButton("Barcelona");
 		buttonGroup.add(rdbtnBarcelona);
 		rdbtnBarcelona.setBounds(297, 88, 92, 23);
 		rdbtnBarcelona.setActionCommand("eur");
@@ -146,6 +147,7 @@ public class clsMain extends JFrame implements interfaceMain
 		panel.add(btnDone);
 
 		btnMore.setBounds(227, 220, 68, 29);
+		btnMore.addActionListener(new btnListenerMORE());
 		panel.add(btnMore);
 
 	}
@@ -155,29 +157,29 @@ public class clsMain extends JFrame implements interfaceMain
 		public void actionPerformed(ActionEvent e) {
 			switch (e.getActionCommand())
 			{
-				case "cad":
-				{
-					cadField.setEditable(true);
-					usdField.setEditable(false);
-					eurField.setEditable(false);
-					break;
-				}
+			case "cad":
+			{
+				cadField.setEditable(true);
+				usdField.setEditable(false);
+				eurField.setEditable(false);
+				break;
+			}
 
-				case "usd":
-				{
-					cadField.setEditable(false);
-					usdField.setEditable(true);
-					eurField.setEditable(false);
-					break;
-				}
+			case "usd":
+			{
+				cadField.setEditable(false);
+				usdField.setEditable(true);
+				eurField.setEditable(false);
+				break;
+			}
 
-				case "eur":
-				{
-					cadField.setEditable(false);
-					usdField.setEditable(false);
-					eurField.setEditable(true);
-					break;
-				}
+			case "eur":
+			{
+				cadField.setEditable(false);
+				usdField.setEditable(false);
+				eurField.setEditable(true);
+				break;
+			}
 			}
 		}
 
@@ -200,25 +202,31 @@ public class clsMain extends JFrame implements interfaceMain
 	{
 		public void actionPerformed(ActionEvent e)
 		{
-			int searchUnit = NUM_0;
-
 			if (!catchNumerFormatError(unitIDField, "Please enter a valid \"Unit ID\" parameter.")) { return; }
+			
+			int searchUnit = Integer.parseInt(unitIDField.getText());
 
 			for (Map.Entry<Integer, clsUnit> map : unitMap.entrySet())
 			{
 				if (searchUnit == map.getKey())
 				{
 					// Display unit info and disable text fields.
+					descField.setText(map.getValue().getItemDsc());
+					qtyField.setText(Integer.toString(map.getValue().getQtyOnHand()));
+					cadField.setText(Double.toString(Math.round(map.getValue().getCadPrice() * 100) / 100)); // Round price because float.
+					
+					rdbtnMontreal.doClick();
+					rdbtnMontreal.setEnabled(false);
+					rdbtnNewYork.setEnabled(false);
+					rdbtnBarcelona.setEnabled(false);
+					
+					unitIDField.setEditable(false);
 					descField.setEditable(false);
 					qtyField.setEditable(false);
 					cadField.setEditable(false);
 					usdField.setEditable(false);
 					eurField.setEditable(false);
 
-					descField.setText(map.getValue().getItemDsc());
-					qtyField.setText(Integer.toString(map.getValue().getQtyOnHand()));
-					cadField.setText(Double.toString(map.getValue().getCadPrice()));
-					
 					// Disable buttons.
 					btnClear.setEnabled(false);
 					btnEdit.setEnabled(true);
@@ -240,8 +248,42 @@ public class clsMain extends JFrame implements interfaceMain
 	{
 		public void actionPerformed(ActionEvent e)
 		{
-			
-			
+			// Check for errors in the input fields.
+			if (!catchNumerFormatError(unitIDField, "Please enter a valid \"Unit ID\" parameter.")) { return; }
+			if (!catchNumerFormatError(qtyField, "Please enter a valid \"Qty on Hand\" parameter.")) { return; }
+			int unitID = Integer.parseInt(unitIDField.getText());
+
+			if (unitID < 100 || unitID > 999)
+			{
+				JOptionPane.showMessageDialog(null, "Unit ID must be between 100 and 999", "Unit ID Error", JOptionPane.ERROR_MESSAGE);
+				return;
+			}
+
+			String warehouseCity = EMPTY_STR;
+			float unitPrice = NUM_0;
+			if (rdbtnNewYork.isSelected())
+			{
+				warehouseCity = "New York";
+				if (!catchNumerFormatError(usdField, "Please enter a valid \"Unit Price\" parameter.", true)) { return; } 
+				unitPrice = Float.parseFloat(usdField.getText());
+			}
+			else if (rdbtnNewYork.isSelected())
+			{
+				warehouseCity = "Barcelona";
+				if (!catchNumerFormatError(eurField, "Please enter a valid \"Unit Price\" parameter.", true)) { return; }
+				unitPrice = Float.parseFloat(eurField.getText());
+			}
+			else
+			{
+				warehouseCity = "Montreal";
+				if (!catchNumerFormatError(cadField, "Please enter a valid \"Unit Price\" parameter.", true)) { return; }
+				unitPrice = Float.parseFloat(cadField.getText());
+			}
+
+			// TODO: Make the map sort by unit price.
+			// Add information to map.
+			unitMap.put(unitID, new clsUnit(unitPrice, warehouseCity, Integer.parseInt(qtyField.getText()), descField.getText()));
+
 			// Clear text fields.
 			btnClear.doClick();
 		}
@@ -269,7 +311,26 @@ public class clsMain extends JFrame implements interfaceMain
 		catch (NumberFormatException nfe)
 		{
 			// If an error is caught then throw an error dialog.
-			JOptionPane.showMessageDialog(null, errorMessage , "Input Error", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, errorMessage, "Input Error", JOptionPane.ERROR_MESSAGE);
+			return false;
+		}
+
+		return true;
+	}
+	
+	// Variant of the previous function for floats.
+	public static Boolean catchNumerFormatError(JTextField textfield, String errorMessage, Boolean isFloat)
+	{
+		try
+		{
+			// Parse text field.
+			Float.parseFloat(textfield.getText());
+		}
+
+		catch (NumberFormatException nfe)
+		{
+			// If an error is caught then throw an error dialog.
+			JOptionPane.showMessageDialog(null, errorMessage, "Input Error", JOptionPane.ERROR_MESSAGE);
 			return false;
 		}
 
