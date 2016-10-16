@@ -7,6 +7,7 @@ public interface interfaceMain
 	final String EMPTY_STR = "";
 	
 	final byte NUM_0 = 0;
+	final float NUM_100 = 100.f;
 	
 	final double USD_CAN = 1.0 / 0.76;
 	final double EUR_CAN = 1.0 / 0.67;

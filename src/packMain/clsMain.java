@@ -215,7 +215,7 @@ public class clsMain extends JFrame implements interfaceMain
 					// Display unit info and disable text fields.
 					descField.setText(map.getValue().getItemDsc());
 					qtyField.setText(Integer.toString(map.getValue().getQtyOnHand()));
-					cadField.setText(Double.toString(Math.round(map.getValue().getCadPrice() * 100.0) / 100.0)); // Round price because float.
+					cadField.setText(Double.toString(Math.round(map.getValue().getCadPrice() * NUM_100) / NUM_100)); // Round price because float.
 					
 					rdbtnMontreal.doClick();
 					modifyMode(true);
@@ -258,9 +258,15 @@ public class clsMain extends JFrame implements interfaceMain
 			if (!catchNumberFormatError(qtyField, "Please enter a valid \"Qty on Hand\" parameter.")) { return; }
 			int unitID = Integer.parseInt(unitIDField.getText());
 
-			if (unitID < 100 || unitID > 999)
+			if (unitID < NUM_100 || unitID > 999)
 			{
 				JOptionPane.showMessageDialog(null, "Unit ID must be between 100 and 999", "Unit ID Error", JOptionPane.ERROR_MESSAGE);
+				return;
+			}
+			
+			if (Integer.parseInt(qtyField.getText()) < NUM_0 || Integer.parseInt(qtyField.getText()) > 9999)
+			{
+				JOptionPane.showMessageDialog(null, "Qty on Hand must be between 0 and 9999.", "Quantity Error", JOptionPane.ERROR_MESSAGE);
 				return;
 			}
 
@@ -269,19 +275,37 @@ public class clsMain extends JFrame implements interfaceMain
 			if (rdbtnNewYork.isSelected())
 			{
 				warehouseCity = "New York";
-				if (!catchNumberFormatError(usdField, "Please enter a valid \"Unit Price\" parameter.", true)) { return; } 
+				if (!catchNumberFormatError(usdField, "Please enter a valid \"Unit Price\" parameter.", true)) { return; }
+				if (Integer.parseInt(usdField.getText()) <= NUM_0)
+				{
+					JOptionPane.showMessageDialog(null, "Unit Price must be a positive value.", "Unit Price Error", JOptionPane.ERROR_MESSAGE);
+					return;
+				}
+				
 				unitPrice = Float.parseFloat(usdField.getText());
 			}
 			else if (rdbtnBarcelona.isSelected())
 			{
 				warehouseCity = "Barcelona";
 				if (!catchNumberFormatError(eurField, "Please enter a valid \"Unit Price\" parameter.", true)) { return; }
+				if (Integer.parseInt(eurField.getText()) <= NUM_0)
+				{
+					JOptionPane.showMessageDialog(null, "Unit Price must be a positive value.", "Unit Price Error", JOptionPane.ERROR_MESSAGE);
+					return;
+				}
+				
 				unitPrice = Float.parseFloat(eurField.getText());
 			}
 			else
 			{
 				warehouseCity = "Montreal";
 				if (!catchNumberFormatError(cadField, "Please enter a valid \"Unit Price\" parameter.", true)) { return; }
+				if (Integer.parseInt(cadField.getText()) <= NUM_0)
+				{
+					JOptionPane.showMessageDialog(null, "Unit Price must be a positive value.", "Unit Price Error", JOptionPane.ERROR_MESSAGE);
+					return;
+				}
+				
 				unitPrice = Float.parseFloat(cadField.getText());
 			}
 
