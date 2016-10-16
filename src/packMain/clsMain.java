@@ -147,6 +147,7 @@ public class clsMain extends JFrame implements interfaceMain
 		panel.add(btnSearchById);
 
 		btnDone.setBounds(321, 220, 68, 29);
+		btnDone.addActionListener(new btnListenerDONE());
 		panel.add(btnDone);
 
 		btnMore.setBounds(227, 220, 68, 29);
@@ -305,7 +306,6 @@ public class clsMain extends JFrame implements interfaceMain
 				return;
 			}
 
-			// TODO: Make the map sort by unit price.
 			// Add information to map.
 			unitMap.put(unitID, new clsUnit(unitPrice, warehouseCity, qty, descField.getText()));
 
