@@ -30,25 +30,25 @@ public class clsMain extends JFrame implements interfaceMain
 	private static TreeMap<Integer, clsUnit> unitMap = new TreeMap<>();
 
 	// Text fields.
-	private JTextField unitIDField;
-	private JTextField descField;
-	private JTextField qtyField;
+	static JTextField unitIDField;
+	static JTextField descField;
+	static JTextField qtyField;
 
-	private JTextField cadField;
-	private JTextField usdField;
-	private JTextField eurField;
+	static JTextField cadField;
+	static JTextField usdField;
+	static JTextField eurField;
 
 	// Buttons.
-	final JButton btnClear = new JButton("Clear");
-	final JButton btnEdit = new JButton("Edit");
-	final JButton btnDelete = new JButton("Delete");
-	final JButton btnSearchById = new JButton("Search by ID");
-	final JButton btnDone = new JButton("Done");
-	final JButton btnMore = new JButton("More");
+	final static JButton btnClear = new JButton("Clear");
+	final static JButton btnEdit = new JButton("Edit");
+	final static JButton btnDelete = new JButton("Delete");
+	final static JButton btnSearchById = new JButton("Search by ID");
+	final static JButton btnDone = new JButton("Done");
+	final static JButton btnMore = new JButton("More");
 
-	JRadioButton rdbtnMontreal = new JRadioButton("Montreal");
-	JRadioButton rdbtnNewYork = new JRadioButton("New York");
-	JRadioButton rdbtnBarcelona = new JRadioButton("Barcelona");
+	final static JRadioButton rdbtnMontreal = new JRadioButton("Montreal");
+	final static JRadioButton rdbtnNewYork = new JRadioButton("New York");
+	final static JRadioButton rdbtnBarcelona = new JRadioButton("Barcelona");
 
 	private final ButtonGroup buttonGroup = new ButtonGroup();
 
@@ -133,10 +133,12 @@ public class clsMain extends JFrame implements interfaceMain
 
 		btnEdit.setBounds(227, 179, 68, 29);
 		btnEdit.setEnabled(false);
+		btnEdit.addActionListener(new btnListenerEDIT());
 		panel.add(btnEdit);
 
 		btnDelete.setBounds(311, 179, 77, 29);
 		btnDelete.setEnabled(false);
+		btnDelete.addActionListener(new btnListenerDELETE());
 		panel.add(btnDelete);
 
 		btnSearchById.setBounds(98, 220, 117, 29);
@@ -202,7 +204,7 @@ public class clsMain extends JFrame implements interfaceMain
 	{
 		public void actionPerformed(ActionEvent e)
 		{
-			if (!catchNumerFormatError(unitIDField, "Please enter a valid \"Unit ID\" parameter.")) { return; }
+			if (!catchNumberFormatError(unitIDField, "Please enter a valid \"Unit ID\" parameter.")) { return; }
 			
 			int searchUnit = Integer.parseInt(unitIDField.getText());
 
@@ -213,28 +215,10 @@ public class clsMain extends JFrame implements interfaceMain
 					// Display unit info and disable text fields.
 					descField.setText(map.getValue().getItemDsc());
 					qtyField.setText(Integer.toString(map.getValue().getQtyOnHand()));
-					cadField.setText(Double.toString(Math.round(map.getValue().getCadPrice() * 100) / 100)); // Round price because float.
+					cadField.setText(Double.toString(Math.round(map.getValue().getCadPrice() * 100.0) / 100.0)); // Round price because float.
 					
 					rdbtnMontreal.doClick();
-					rdbtnMontreal.setEnabled(false);
-					rdbtnNewYork.setEnabled(false);
-					rdbtnBarcelona.setEnabled(false);
-					
-					unitIDField.setEditable(false);
-					descField.setEditable(false);
-					qtyField.setEditable(false);
-					cadField.setEditable(false);
-					usdField.setEditable(false);
-					eurField.setEditable(false);
-
-					// Disable buttons.
-					btnClear.setEnabled(false);
-					btnEdit.setEnabled(true);
-					btnDelete.setEnabled(true);
-					btnSearchById.setEnabled(false);
-					btnDone.setEnabled(false);
-					btnMore.setEnabled(false);
-
+					modifyMode(true);
 					return;
 				}
 			}
@@ -243,14 +227,35 @@ public class clsMain extends JFrame implements interfaceMain
 			JOptionPane.showMessageDialog(null, "No unit with that ID was found in the database.", "ID Does Not Exist", JOptionPane.ERROR_MESSAGE);
 		}
 	}
+	
+	class btnListenerEDIT implements ActionListener // Lets the user edit the unit found with "Search by ID".
+	{
+		public void actionPerformed(ActionEvent e)
+		{
+			modifyMode(false);
+		}
+			
+	}
+	
+	class btnListenerDELETE implements ActionListener // Lets the user remove the unit found with "Search by ID" from the database.
+	{
+		public void actionPerformed(ActionEvent e)
+		{
+			unitMap.remove(Integer.parseInt(unitIDField.getText()));
+			
+			modifyMode(false);
+			btnClear.doClick();
+		}
+			
+	}
 
 	class btnListenerMORE implements ActionListener // Searches for and displays the unit based on the ID, if it exists.
 	{
 		public void actionPerformed(ActionEvent e)
 		{
 			// Check for errors in the input fields.
-			if (!catchNumerFormatError(unitIDField, "Please enter a valid \"Unit ID\" parameter.")) { return; }
-			if (!catchNumerFormatError(qtyField, "Please enter a valid \"Qty on Hand\" parameter.")) { return; }
+			if (!catchNumberFormatError(unitIDField, "Please enter a valid \"Unit ID\" parameter.")) { return; }
+			if (!catchNumberFormatError(qtyField, "Please enter a valid \"Qty on Hand\" parameter.")) { return; }
 			int unitID = Integer.parseInt(unitIDField.getText());
 
 			if (unitID < 100 || unitID > 999)
@@ -264,26 +269,26 @@ public class clsMain extends JFrame implements interfaceMain
 			if (rdbtnNewYork.isSelected())
 			{
 				warehouseCity = "New York";
-				if (!catchNumerFormatError(usdField, "Please enter a valid \"Unit Price\" parameter.", true)) { return; } 
+				if (!catchNumberFormatError(usdField, "Please enter a valid \"Unit Price\" parameter.", true)) { return; } 
 				unitPrice = Float.parseFloat(usdField.getText());
 			}
-			else if (rdbtnNewYork.isSelected())
+			else if (rdbtnBarcelona.isSelected())
 			{
 				warehouseCity = "Barcelona";
-				if (!catchNumerFormatError(eurField, "Please enter a valid \"Unit Price\" parameter.", true)) { return; }
+				if (!catchNumberFormatError(eurField, "Please enter a valid \"Unit Price\" parameter.", true)) { return; }
 				unitPrice = Float.parseFloat(eurField.getText());
 			}
 			else
 			{
 				warehouseCity = "Montreal";
-				if (!catchNumerFormatError(cadField, "Please enter a valid \"Unit Price\" parameter.", true)) { return; }
+				if (!catchNumberFormatError(cadField, "Please enter a valid \"Unit Price\" parameter.", true)) { return; }
 				unitPrice = Float.parseFloat(cadField.getText());
 			}
 
 			// TODO: Make the map sort by unit price.
 			// Add information to map.
 			unitMap.put(unitID, new clsUnit(unitPrice, warehouseCity, Integer.parseInt(qtyField.getText()), descField.getText()));
-
+			
 			// Clear text fields.
 			btnClear.doClick();
 		}
@@ -300,7 +305,7 @@ public class clsMain extends JFrame implements interfaceMain
 	}
 
 	// Function used for catching errors involving incorrect data being inputed into text fields.
-	public static Boolean catchNumerFormatError(JTextField textfield, String errorMessage)
+	public static Boolean catchNumberFormatError(JTextField textfield, String errorMessage)
 	{
 		try
 		{
@@ -319,7 +324,7 @@ public class clsMain extends JFrame implements interfaceMain
 	}
 	
 	// Variant of the previous function for floats.
-	public static Boolean catchNumerFormatError(JTextField textfield, String errorMessage, Boolean isFloat)
+	public static Boolean catchNumberFormatError(JTextField textfield, String errorMessage, Boolean isFloat)
 	{
 		try
 		{
@@ -335,5 +340,39 @@ public class clsMain extends JFrame implements interfaceMain
 		}
 
 		return true;
+	}
+	
+	// Toggles whether the buttons and text fields are usable.
+	public static void modifyMode(Boolean enable)
+	{
+		rdbtnMontreal.setEnabled(!enable);
+		rdbtnNewYork.setEnabled(!enable);
+		rdbtnBarcelona.setEnabled(!enable);
+		
+		unitIDField.setEditable(!enable);
+		descField.setEditable(!enable);
+		qtyField.setEditable(!enable);
+
+		// Toggle buttons so that "Edit" and "Delete" are always in the opposite state.
+		btnClear.setEnabled(!enable);
+		btnEdit.setEnabled(enable);
+		btnDelete.setEnabled(enable);
+		btnSearchById.setEnabled(!enable);
+		btnDone.setEnabled(!enable);
+		btnMore.setEnabled(!enable);
+		
+		// This prevents all three local price fields from being opened.
+		if (enable)
+		{
+			cadField.setEditable(true);
+			usdField.setEditable(false);
+			eurField.setEditable(false);
+		}
+		else
+		{
+			cadField.setEditable(false);
+			usdField.setEditable(false);
+			eurField.setEditable(false);
+		}
 	}
 }
