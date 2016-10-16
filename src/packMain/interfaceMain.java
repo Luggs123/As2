@@ -2,7 +2,6 @@ package packMain;
 // TODO: Add all constants here.
 public interface interfaceMain
 {
-	// TODO: Float constant for 100?
 	// Constants.
 	final String EMPTY_STR = "";
 	
