@@ -28,7 +28,7 @@ import javax.swing.JTextField;
 public class clsMain extends JFrame implements interfaceMain
 {
 	private static final long serialVersionUID = -1784204695438064302L;
-	private static TreeMap<Integer, clsUnit> unitMap = new TreeMap<>();
+	private static Map<Integer, clsUnit> unitMap = new TreeMap<>();
 
 	// Text fields.
 	static JTextField unitIDField;
