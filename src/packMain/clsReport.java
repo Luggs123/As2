@@ -1,8 +1,10 @@
 package packMain;
 
-import java.awt.GridLayout;
 import java.util.Map;
 import java.util.TreeMap;
+
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -14,7 +16,6 @@ import packUnit.clsUnit;
 public class clsReport extends JFrame implements interfaceMain
 {
 	private static final long serialVersionUID = -5812478219799894245L;
-	private static JScrollPane inventoryScrollPane = new JScrollPane();
 	private static Map<Integer, clsUnit> unitMap = new TreeMap<Integer, clsUnit>(clsMain.sortByValues(clsMain.unitMap));
 	
 	protected String[][] tableInventory;
@@ -24,6 +25,10 @@ public class clsReport extends JFrame implements interfaceMain
 	{
 		setTitle("Yearly Inventory Report");
 		getContentPane().setLayout(new GridLayout(0, 1, 0, 0));
+		
+		JPanel panel = new JPanel();
+		getContentPane().add(panel);
+		panel.setLayout(new FlowLayout());
 		
 		// Convert map of unit entries into a two-dimensional string.
 		tableInventory = new String[unitMap.entrySet().size()][6];
@@ -44,11 +49,7 @@ public class clsReport extends JFrame implements interfaceMain
 		String[] columnNames = {"Unit ID", "Description", "Qty On Hand", "Unit Price", "Warehouse City", "Total (CAD)"};
 		
 		JTable inventoryReport = new JTable(tableInventory, columnNames);
-		inventoryScrollPane.add(inventoryReport);
 
-		JPanel panel = new JPanel();
-		getContentPane().add(panel);
-		panel.setLayout(null);
-		panel.add(inventoryScrollPane);
+		panel.add(new JScrollPane(inventoryReport));
 	}
 }
