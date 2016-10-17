@@ -28,7 +28,7 @@ import javax.swing.JTextField;
 public class clsMain extends JFrame implements interfaceMain
 {
 	private static final long serialVersionUID = -1784204695438064302L;
-	private static Map<Integer, clsUnit> unitMap = new TreeMap<>();
+	static Map<Integer, clsUnit> unitMap = new TreeMap<>();
 
 	// Text fields.
 	static JTextField unitIDField;
@@ -314,13 +314,13 @@ public class clsMain extends JFrame implements interfaceMain
 		}
 	}
 	
-	class btnListenerDONE implements ActionListener
+	class btnListenerDONE implements ActionListener // Kills the current frame and generates the report frame.
 	{
 		@Override
 		public void actionPerformed(ActionEvent e) 
 		{
-			unitMap = new TreeMap<Integer, clsUnit>(sortByValues(unitMap));
-			// TODO Auto-generated method stub
+			clsMain.this.dispose();
+			new clsReport();
 		}
 	}
 
