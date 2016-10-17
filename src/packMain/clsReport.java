@@ -40,14 +40,4 @@ public class clsReport extends JFrame implements interfaceMain
 		JTable inventoryReport = new JTable(tableInventory, columnNames);
 		inventoryScrollPane.add(inventoryReport);
 	}
-	
-	public static void main(String[] args)
-	{
-		clsMain frame = new clsMain();
-		frame.setSize(700, 410);
-		frame.setResizable(false);
-		frame.setLocationRelativeTo(null);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setVisible(true);
-	}
 }
