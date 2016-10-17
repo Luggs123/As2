@@ -320,12 +320,12 @@ public class clsMain extends JFrame implements interfaceMain
 		public void actionPerformed(ActionEvent e) 
 		{
 			// Draw report frame.
-			clsReport frame = new clsReport();
-			frame.setSize(700, 410);
-			frame.setResizable(false);
-			frame.setLocationRelativeTo(null);
-			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			frame.setVisible(true);
+			clsReport reportFrame = new clsReport();
+			reportFrame.setSize(700, 410);
+			reportFrame.setResizable(false);
+			reportFrame.setLocationRelativeTo(null);
+			reportFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			reportFrame.setVisible(true);
 			
 			clsMain.this.dispose();
 		}

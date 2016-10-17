@@ -1,9 +1,11 @@
 package packMain;
 
+import java.awt.GridLayout;
 import java.util.Map;
 import java.util.TreeMap;
 
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
@@ -20,6 +22,10 @@ public class clsReport extends JFrame implements interfaceMain
 	
 	public clsReport()
 	{
+		setTitle("Yearly Inventory Report");
+		getContentPane().setLayout(new GridLayout(0, 1, 0, 0));
+		
+		// Convert map of unit entries into a two-dimensional string.
 		tableInventory = new String[unitMap.entrySet().size()][6];
 		int entryNum = NUM_0;
 		for (Map.Entry<Integer, clsUnit> entry : unitMap.entrySet())
@@ -39,5 +45,10 @@ public class clsReport extends JFrame implements interfaceMain
 		
 		JTable inventoryReport = new JTable(tableInventory, columnNames);
 		inventoryScrollPane.add(inventoryReport);
+
+		JPanel panel = new JPanel();
+		getContentPane().add(panel);
+		panel.setLayout(null);
+		panel.add(inventoryScrollPane);
 	}
 }
