@@ -12,7 +12,6 @@ import packUnit.clsUnit;
 public class clsReport extends JFrame implements interfaceMain
 {
 	private static final long serialVersionUID = -5812478219799894245L;
-	private static JTable inventoryReport = new JTable();
 	private static JScrollPane inventoryScrollPane = new JScrollPane();
 	private static Map<Integer, clsUnit> unitMap = new TreeMap<Integer, clsUnit>(clsMain.sortByValues(clsMain.unitMap));
 	
@@ -35,5 +34,20 @@ public class clsReport extends JFrame implements interfaceMain
 			
 			entryNum++;
 		}
+		
+		String[] columnNames = {"Unit ID", "Description", "Qty On Hand", "Unit Price", "Warehouse City", "Total (CAD)"};
+		
+		JTable inventoryReport = new JTable(tableInventory, columnNames);
+		inventoryScrollPane.add(inventoryReport);
+	}
+	
+	public static void main(String[] args)
+	{
+		clsMain frame = new clsMain();
+		frame.setSize(700, 410);
+		frame.setResizable(false);
+		frame.setLocationRelativeTo(null);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setVisible(true);
 	}
 }
