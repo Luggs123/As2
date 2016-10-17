@@ -161,29 +161,29 @@ public class clsMain extends JFrame implements interfaceMain
 		public void actionPerformed(ActionEvent e) {
 			switch (e.getActionCommand())
 			{
-			case "cad":
-			{
-				cadField.setEditable(true);
-				usdField.setEditable(false);
-				eurField.setEditable(false);
-				break;
-			}
-
-			case "usd":
-			{
-				cadField.setEditable(false);
-				usdField.setEditable(true);
-				eurField.setEditable(false);
-				break;
-			}
-
-			case "eur":
-			{
-				cadField.setEditable(false);
-				usdField.setEditable(false);
-				eurField.setEditable(true);
-				break;
-			}
+				case "cad":
+				{
+					cadField.setEditable(true);
+					usdField.setEditable(false);
+					eurField.setEditable(false);
+					break;
+				}
+	
+				case "usd":
+				{
+					cadField.setEditable(false);
+					usdField.setEditable(true);
+					eurField.setEditable(false);
+					break;
+				}
+	
+				case "eur":
+				{
+					cadField.setEditable(false);
+					usdField.setEditable(false);
+					eurField.setEditable(true);
+					break;
+				}
 			}
 		}
 

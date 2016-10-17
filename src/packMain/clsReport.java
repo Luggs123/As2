@@ -49,6 +49,7 @@ public class clsReport extends JFrame implements interfaceMain
 		String[] columnNames = {"Unit ID", "Description", "Qty On Hand", "Unit Price", "Warehouse City", "Total (CAD)"};
 		
 		JTable inventoryReport = new JTable(tableInventory, columnNames);
+		inventoryReport.setEnabled(false);
 
 		panel.add(new JScrollPane(inventoryReport));
 	}
