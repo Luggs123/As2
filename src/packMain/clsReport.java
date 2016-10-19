@@ -56,6 +56,8 @@ public class clsReport extends JFrame implements interfaceMain
 		
 		JTable inventoryReport = new JTable(tableInventory, columnNames);
 		inventoryReport.setEnabled(false);
+                inventoryReport.getTableHeader().setReorderingAllowed(false);
+                inventoryReport.getTableHeader().setResizingAllowed(false);
 		
 		JScrollPane reportScrollPane = new JScrollPane(inventoryReport);
 		reportScrollPane.setBounds(57, 5, 600, 300);
