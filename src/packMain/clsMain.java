@@ -206,7 +206,7 @@ public class clsMain extends JFrame implements interfaceMain
 	{
 		public void actionPerformed(ActionEvent e)
 		{
-			if (!catchNumberFormatError(unitIDField, "Please enter a valid \"Unit ID\" parameter.")) { return; }
+			if (catchNumberFormatError(unitIDField, "Please enter a valid \"Unit ID\" parameter.")) { return; }
 
 			int searchUnit = Integer.parseInt(unitIDField.getText());
 
@@ -256,8 +256,8 @@ public class clsMain extends JFrame implements interfaceMain
 		public void actionPerformed(ActionEvent e)
 		{
 			// Check for errors in the input fields.
-			if (!catchNumberFormatError(unitIDField, "Please enter a valid \"Unit ID\" parameter.")) { return; }
-			if (!catchNumberFormatError(qtyField, "Please enter a valid \"Qty on Hand\" parameter.")) { return; }
+			if (catchNumberFormatError(unitIDField, "Please enter a valid \"Unit ID\" parameter.")) { return; }
+			if (catchNumberFormatError(qtyField, "Please enter a valid \"Qty on Hand\" parameter.")) { return; }
 			int unitID = Integer.parseInt(unitIDField.getText());
 			int qty = Integer.parseInt(qtyField.getText());
 
@@ -284,19 +284,19 @@ public class clsMain extends JFrame implements interfaceMain
 			if (rdbtnNewYork.isSelected())
 			{
 				warehouseCity = "New York";
-				if (!catchNumberFormatError(usdField, "Please enter a valid \"Unit Price\" parameter.", true)) { return; }
+				if (catchNumberFormatError(usdField, "Please enter a valid \"Unit Price\" parameter.", true)) { return; }
 				unitPrice = Float.parseFloat(usdField.getText());
 			}
 			else if (rdbtnBarcelona.isSelected())
 			{
 				warehouseCity = "Barcelona";
-				if (!catchNumberFormatError(eurField, "Please enter a valid \"Unit Price\" parameter.", true)) { return; }
+				if (catchNumberFormatError(eurField, "Please enter a valid \"Unit Price\" parameter.", true)) { return; }
 				unitPrice = Float.parseFloat(eurField.getText());
 			}
 			else
 			{
 				warehouseCity = "Montreal";
-				if (!catchNumberFormatError(cadField, "Please enter a valid \"Unit Price\" parameter.", true)) { return; }
+				if (catchNumberFormatError(cadField, "Please enter a valid \"Unit Price\" parameter.", true)) { return; }
 				unitPrice = Float.parseFloat(cadField.getText());
 			}
 
@@ -355,10 +355,10 @@ public class clsMain extends JFrame implements interfaceMain
 		{
 			// If an error is caught then throw an error dialog.
 			JOptionPane.showMessageDialog(null, errorMessage, "Input Error", JOptionPane.ERROR_MESSAGE);
-			return false;
+			return true;
 		}
 
-		return true;
+		return false;
 	}
 
 	// Variant of the previous function for floats.
@@ -374,10 +374,10 @@ public class clsMain extends JFrame implements interfaceMain
 		{
 			// If an error is caught then throw an error dialog.
 			JOptionPane.showMessageDialog(null, errorMessage, "Input Error", JOptionPane.ERROR_MESSAGE);
-			return false;
+			return true;
 		}
 
-		return true;
+		return false;
 	}
 
 	// Toggles whether the buttons and text fields are usable.
