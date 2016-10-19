@@ -12,4 +12,16 @@ public interface interfaceMain
 	final double EUR_CAN = 1.0 / 0.67;
 	final float CAN_CAN = 1.f;
 	
+	final int JAN = 31;
+	final int FEB = 28;
+	final int MAR = 31;
+	final int APR = 30;
+	final int MAY = 31;
+	final int JUN = 30;
+	final int JUL = 31;
+	final int AUG = 31;
+	final int SEP = 30;
+	final int OCT = 31;
+	final int NOV = 30;
+	final int DEC = 31;
 }

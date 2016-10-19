@@ -10,10 +10,10 @@ public class clsEmployee
 	public GregorianCalendar loginDate;
 	public String dateOutput;
 	
-	public clsEmployee(String name, int iD, GregorianCalendar loginDate)
+	public clsEmployee(int iD, String name, GregorianCalendar loginDate)
 	{
-		this.name = name;
 		this.ID = iD;
+		this.name = name;
 		this.loginDate = new GregorianCalendar();
 		this.dateOutput = loginDate.get(Calendar.DAY_OF_MONTH) + "-" + loginDate.get(Calendar.MONTH) + "-" + loginDate.get(Calendar.YEAR);
 	}
