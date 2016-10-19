@@ -10,12 +10,14 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
+import packEmployee.clsEmployee;
 import packUnit.clsUnit;
 
 public class clsReport extends JFrame implements interfaceMain
 {
 	private static final long serialVersionUID = -5812478219799894245L;
 	private static Map<Integer, clsUnit> unitMap = new TreeMap<Integer, clsUnit>(clsMain.sortByValues(clsMain.unitMap));
+	clsEmployee employeeInfo = clsEmployeeUI.employeeInfo;
 	
 	protected Object[][] tableInventory;
 	protected int unitTotals = NUM_0;
