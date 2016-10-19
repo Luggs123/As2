@@ -75,10 +75,13 @@ public class clsEmployeeUI extends JFrame implements interfaceMain {
 		{
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				clsMain.catchNumberFormatError(txtId, "Please enter a positive integer for the ID.");
-				clsMain.catchNumberFormatError(txtDay, "Please enter a proper day of this month.");
-				clsMain.catchNumberFormatError(txtMonth, "Please enter an integer from 1 to 12.");
-				clsMain.catchNumberFormatError(txtYear, "Please enter a proper year.");
+				if (clsMain.catchNumberFormatError(txtId, "Please enter a positive integer for the ID.") || 
+						clsMain.catchNumberFormatError(txtDay, "Please enter a proper day of this month.") ||
+						clsMain.catchNumberFormatError(txtMonth, "Please enter an integer from 1 to 12.") ||
+						clsMain.catchNumberFormatError(txtYear, "Please enter a proper year."))
+				{
+					return;
+				}
 				
 				int ID = Integer.parseInt(txtId.getText());
 				String name = txtName.getText();
@@ -151,7 +154,7 @@ public class clsEmployeeUI extends JFrame implements interfaceMain {
 	public static void main(String[] args) 
 	{
 		clsEmployeeUI frame = new clsEmployeeUI();
-		frame.setSize(500, 200);
+		frame.setSize(400, 350);
 		frame.setResizable(false);
 		frame.setLocationRelativeTo(null);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
