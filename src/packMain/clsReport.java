@@ -92,7 +92,7 @@ public class clsReport extends JFrame implements interfaceMain
 		panel.add(lblUnitDescription);
 		
 		JLabel lblMaxUnitDetails = new JLabel(String.format("%-20d %-17s %-20d %-19.2f %-17s %-11.2f", maxUnit.getID(), 
-				maxUnit.getItemDsc(), maxUnit.getQtyOnHand(), maxUnit.getLocalPrice(), maxUnit.getWarehouseCity(), 
+				maxUnit.getItemDsc(), maxUnit.getQtyOnHand(), maxUnit.getCadPrice(), maxUnit.getWarehouseCity(), 
 				maxUnit.getTotalPrice()));
 		lblMaxUnitDetails.setBounds(57, 438, 600, 16);
 		panel.add(lblMaxUnitDetails);
@@ -102,7 +102,7 @@ public class clsReport extends JFrame implements interfaceMain
 		panel.add(lblLowestTotalAmount);
 		
 		JLabel lblMinUnitDetails = new JLabel(String.format("%-20d %-17s %-20d %-19.2f %-17s %-11.2f", minUnit.getID(), 
-				minUnit.getItemDsc(), minUnit.getQtyOnHand(), minUnit.getLocalPrice(), minUnit.getWarehouseCity(), 
+				minUnit.getItemDsc(), minUnit.getQtyOnHand(), minUnit.getCadPrice(), minUnit.getWarehouseCity(), 
 				minUnit.getTotalPrice()));
 		lblMinUnitDetails.setBounds(57, 487, 600, 16);
 		panel.add(lblMinUnitDetails);
