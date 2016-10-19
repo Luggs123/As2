@@ -87,7 +87,7 @@ public class clsEmployeeUI extends JFrame implements interfaceMain {
 				int year = Integer.parseInt(txtYear.getText());
 				int maxDays;
 				
-				if (month < 0 || month > 12) {
+				if (month <= 0 || month > 12) {
 					JOptionPane.showMessageDialog(null, "Please enter a month, from 1 to 12.", "Input Error", JOptionPane.ERROR_MESSAGE);
 					return;
 				}
