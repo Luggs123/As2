@@ -21,11 +21,13 @@ public class clsReport extends JFrame implements interfaceMain
 	
 	protected Object[][] tableInventory;
 	protected float unitTotals = NUM_0;
+	protected float montrealTotals = NUM_0;
 	
 	public clsReport()
 	{
 		setTitle("Yearly Inventory Report");
 		getContentPane().setLayout(new GridLayout(0, 1, 0, 0));
+		setSize(750, 600);
 		
 		JPanel panel = new JPanel();
 		getContentPane().add(panel);
@@ -39,9 +41,13 @@ public class clsReport extends JFrame implements interfaceMain
 			tableInventory[entryNum][1] = entry.getValue().getItemDsc();
 			tableInventory[entryNum][2] = entry.getValue().getQtyOnHand();
 			tableInventory[entryNum][3] = entry.getValue().getCadPrice();
-			tableInventory[entryNum][4] = entry.getValue().getWarehouseCity();
+			tableInventory[entryNum][4] = entry.getValue().getWarehouseCity();			
 			tableInventory[entryNum][5] = entry.getValue().getTotalPrice();
 			
+			if (tableInventory[entryNum][4] == "Montreal")
+			{
+				montrealTotals += entry.getValue().getTotalPrice();
+			}
 			unitTotals += entry.getValue().getTotalPrice();
 			
 			// Adding decimal values to Unit Price and total to columns.
@@ -58,12 +64,17 @@ public class clsReport extends JFrame implements interfaceMain
 		inventoryReport.setEnabled(false);
 		
 		JScrollPane reportScrollPane = new JScrollPane(inventoryReport);
-		reportScrollPane.setBounds(57, 5, 600, 300);
+		reportScrollPane.setBounds(57, 47, 600, 300);
 		panel.add(reportScrollPane);
 		
 		JLabel lblTotal = new JLabel("Report Total: " + String.format("$%.2f", unitTotals));
-		lblTotal.setBounds(57, 331, 180, 16);
+		lblTotal.setBounds(57, 360, 180, 16);
 		panel.add(lblTotal);
+		
+		JLabel lblNewLabel = new JLabel("Employee ID: " + employeeInfo.ID + ", Employee Name: " 
+				+ employeeInfo.name + ", Date: " + employeeInfo.dateOutput + ".");
+		lblNewLabel.setBounds(57, 13, 600, 16);
+		panel.add(lblNewLabel);
 		
 		
 	}

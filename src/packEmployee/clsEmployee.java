@@ -5,8 +5,9 @@ import java.util.GregorianCalendar;
 
 public class clsEmployee
 {
-	public String name;
+
 	public int ID;
+	public String name;
 	public GregorianCalendar loginDate;
 	public String dateOutput;
 	
