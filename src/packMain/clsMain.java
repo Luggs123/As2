@@ -307,7 +307,7 @@ public class clsMain extends JFrame implements interfaceMain
 			}
 
 			// Add information to map.
-			unitMap.put(unitID, new clsUnit(unitPrice, warehouseCity, qty, descField.getText()));
+			unitMap.put(unitID, new clsUnit(unitID, unitPrice, warehouseCity, qty, descField.getText()));
 
 			// Clear text fields.
 			btnClear.doClick();

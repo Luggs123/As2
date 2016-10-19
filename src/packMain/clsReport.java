@@ -82,7 +82,34 @@ public class clsReport extends JFrame implements interfaceMain
 		lblNewLabel.setBounds(57, 13, 600, 16);
 		panel.add(lblNewLabel);
 		
+		JLabel lblHighestTotalCAD = new JLabel("Highest Total Amount (in CAD):");
+		lblHighestTotalCAD.setBounds(57, 386, 198, 16);
+		panel.add(lblHighestTotalCAD);
 		
+		JLabel lblUnitDescription = new JLabel("Unit ID              Description         Qty On Hand          Unit Price" 
+				+ "          WarehouseCity     Total (CAD)");
+		lblUnitDescription.setBounds(57, 412, 600, 16);
+		panel.add(lblUnitDescription);
+		
+		JLabel lblMaxUnitDetails = new JLabel(String.format("%-20d %-17s %-20d %-19.2f %-17s %-11.2f", maxUnit.getID(), 
+				maxUnit.getItemDsc(), maxUnit.getQtyOnHand(), maxUnit.getLocalPrice(), maxUnit.getWarehouseCity(), 
+				maxUnit.getTotalPrice()));
+		lblMaxUnitDetails.setBounds(57, 438, 600, 16);
+		panel.add(lblMaxUnitDetails);
+		
+		JLabel lblLowestTotalAmount = new JLabel("Lowest Total Amount (in CAD):");
+		lblLowestTotalAmount.setBounds(57, 464, 198, 16);
+		panel.add(lblLowestTotalAmount);
+		
+		JLabel lblMinUnitDetails = new JLabel(String.format("%-20d %-17s %-20d %-19.2f %-17s %-11.2f", minUnit.getID(), 
+				minUnit.getItemDsc(), minUnit.getQtyOnHand(), minUnit.getLocalPrice(), minUnit.getWarehouseCity(), 
+				minUnit.getTotalPrice()));
+		lblMinUnitDetails.setBounds(57, 487, 600, 16);
+		panel.add(lblMinUnitDetails);
+		
+		JLabel lblTotalAmountIn = new JLabel("Total Amount in the Warehouse of Montreal (in CAD): " + montrealTotals);
+		lblTotalAmountIn.setBounds(57, 516, 506, 16);
+		panel.add(lblTotalAmountIn);
 	}
 	
 	public Comparator<clsUnit> getTotalPriceComparator()

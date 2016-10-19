@@ -4,6 +4,7 @@ import packMain.interfaceMain;
 
 public class clsUnit implements interfaceMain, Comparable<clsUnit>
 {
+	private int ID;
 	private float localPrice;
 	private String warehouseCity;
 	private float cadPrice;
@@ -35,7 +36,7 @@ public class clsUnit implements interfaceMain, Comparable<clsUnit>
 		return (float) (cadPrice * qtyOnHand);
 	}
 
-	public clsUnit(float localPrice, String warehouseCity, int qtyOnHand, String itemDsc)
+	public clsUnit(int ID, float localPrice, String warehouseCity, int qtyOnHand, String itemDsc)
 	{
 		this.localPrice = localPrice;
 		this.warehouseCity = warehouseCity;
@@ -45,6 +46,11 @@ public class clsUnit implements interfaceMain, Comparable<clsUnit>
 		this.totalPrice = computeTotal(cadPrice, qtyOnHand);
 	}
 
+	public int getID()
+	{
+		return ID;
+	}
+	
 	public double getLocalPrice()
 	{
 		return localPrice;
