@@ -18,7 +18,7 @@ import packUnit.clsUnit;
 public class clsReport extends JFrame implements interfaceMain
 {
 	private static final long serialVersionUID = -5812478219799894245L;
-	private static Map<Integer, clsUnit> unitMap = new TreeMap<Integer, clsUnit>(clsMain.sortByValues(clsMain.unitMap));
+	private static Map<Integer, clsUnit> unitMap = new TreeMap<Integer, clsUnit>(sortByValues(clsMain.unitMap));
 	clsUnit maxUnit = Collections.max(unitMap.values(), getTotalPriceComparator());
 	clsUnit minUnit = Collections.min(unitMap.values(), getTotalPriceComparator());
 	clsEmployee employeeInfo = clsEmployeeUI.employeeInfo;
@@ -107,7 +107,7 @@ public class clsReport extends JFrame implements interfaceMain
 		lblMinUnitDetails.setBounds(57, 487, 600, 16);
 		panel.add(lblMinUnitDetails);
 		
-		JLabel lblTotalAmountIn = new JLabel("Total Amount in the Warehouse of Montreal (in CAD): " + montrealTotals);
+		JLabel lblTotalAmountIn = new JLabel(String.format("Total Amount in the Warehouse of Montreal (in CAD):  + %.2f", montrealTotals));
 		lblTotalAmountIn.setBounds(57, 516, 506, 16);
 		panel.add(lblTotalAmountIn);
 	}
@@ -131,5 +131,19 @@ public class clsReport extends JFrame implements interfaceMain
 				}
 			}
 		};
+	}
+	
+	public static <K, V extends Comparable<V>> Map<K, V> sortByValues(final Map<K, V> map) 
+	{
+		Comparator<K> valueComparator =  new Comparator<K>() 
+		{
+			public int compare(K k1, K k2) 
+			{
+				return map.get(k1).compareTo(map.get(k2));
+			}
+		};
+		Map<K, V> sortedByValues = new TreeMap<K, V>(valueComparator);
+		sortedByValues.putAll(map);
+		return sortedByValues;
 	}
 }

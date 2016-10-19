@@ -149,7 +149,7 @@ public class clsEmployeeUI extends JFrame implements interfaceMain {
 				employeeInfo = new clsEmployee(ID, name, new GregorianCalendar(year, month, day));
 				
 				clsReport reportFrame = new clsReport();
-				reportFrame.setSize(700, 410);
+				reportFrame.setSize(750, 600);
 				reportFrame.setResizable(false);
 				reportFrame.setLocationRelativeTo(null);
 				reportFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

@@ -16,7 +16,8 @@ public class clsEmployee
 		this.ID = iD;
 		this.name = name;
 		this.loginDate = new GregorianCalendar();
-		this.dateOutput = loginDate.get(Calendar.DAY_OF_MONTH) + "-" + loginDate.get(Calendar.MONTH) + "-" + loginDate.get(Calendar.YEAR);
+		this.dateOutput = String.format("%02d", loginDate.get(Calendar.DAY_OF_MONTH)) + "-" + 
+				String.format("%02d", loginDate.get(Calendar.MONTH)) + "-" + loginDate.get(Calendar.YEAR);
 	}
 	
 	
