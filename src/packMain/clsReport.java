@@ -1,6 +1,8 @@
 package packMain;
 
 import java.awt.GridLayout;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -17,6 +19,8 @@ public class clsReport extends JFrame implements interfaceMain
 {
 	private static final long serialVersionUID = -5812478219799894245L;
 	private static Map<Integer, clsUnit> unitMap = new TreeMap<Integer, clsUnit>(clsMain.sortByValues(clsMain.unitMap));
+	clsUnit maxUnit = Collections.max(unitMap.values(), getTotalPriceComparator());
+	clsUnit minUnit = Collections.min(unitMap.values(), getTotalPriceComparator());
 	clsEmployee employeeInfo = clsEmployeeUI.employeeInfo;
 	
 	protected Object[][] tableInventory;
@@ -62,8 +66,8 @@ public class clsReport extends JFrame implements interfaceMain
 		
 		JTable inventoryReport = new JTable(tableInventory, columnNames);
 		inventoryReport.setEnabled(false);
-                inventoryReport.getTableHeader().setReorderingAllowed(false);
-                inventoryReport.getTableHeader().setResizingAllowed(false);
+		inventoryReport.getTableHeader().setReorderingAllowed(false);
+		inventoryReport.getTableHeader().setResizingAllowed(false);
 		
 		JScrollPane reportScrollPane = new JScrollPane(inventoryReport);
 		reportScrollPane.setBounds(57, 47, 600, 300);
@@ -79,5 +83,26 @@ public class clsReport extends JFrame implements interfaceMain
 		panel.add(lblNewLabel);
 		
 		
+	}
+	
+	public Comparator<clsUnit> getTotalPriceComparator()
+	{
+		return new Comparator<clsUnit>()
+		{
+			public int compare(clsUnit c1, clsUnit c2)
+			{
+				if (c1.getTotalPrice() > c2.getTotalPrice())
+				{
+					return 1;
+				}
+				else if (c1.getTotalPrice() < c2.getTotalPrice())
+				{
+					return -1;
+				}
+				else {
+					return 0;
+				}
+			}
+		};
 	}
 }
