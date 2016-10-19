@@ -335,7 +335,7 @@ public class clsMain extends JFrame implements interfaceMain
 	{
 		clsMain frame = new clsMain();
 		rdbtnMontreal.doClick();
-		frame.setSize(700, 410);
+		frame.setSize(600, 350);
 		frame.setResizable(false);
 		frame.setLocationRelativeTo(null);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
