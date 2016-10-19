@@ -22,7 +22,7 @@ public class clsEmployeeUI extends JFrame implements interfaceMain {
 	private JTextField txtDay;
 	private JTextField txtMonth;
 	private JTextField txtYear;
-	protected clsEmployee employeeInfo;
+	protected static clsEmployee employeeInfo;
 	
 	public clsEmployeeUI() 
 	{
