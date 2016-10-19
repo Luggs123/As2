@@ -13,8 +13,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import org.eclipse.wb.swing.FocusTraversalOnArray;
-
 import packEmployee.clsEmployee;
 
 public class clsEmployeeUI extends JFrame implements interfaceMain {
@@ -148,7 +146,6 @@ public class clsEmployeeUI extends JFrame implements interfaceMain {
 			}
 		});
 		panel.add(btnDone);
-		panel.setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{lblEmployeeId, txtId, lblEmployeeName, txtName, lblDate, txtDay, txtMonth, txtYear}));
 	}
 	
 	public static void main(String[] args) 
