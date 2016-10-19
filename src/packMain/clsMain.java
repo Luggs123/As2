@@ -6,7 +6,7 @@ package packMain;
  *** Date Last Modified; October 10th, 2016
  ***/
 
-import packUnit.*;
+import packUnit.clsUnit;
 
 import java.util.Comparator;
 import java.util.Map;
@@ -320,12 +320,12 @@ public class clsMain extends JFrame implements interfaceMain
 		public void actionPerformed(ActionEvent e) 
 		{
 			// Draw report frame.
-			clsReport reportFrame = new clsReport();
-			reportFrame.setSize(700, 410);
-			reportFrame.setResizable(false);
-			reportFrame.setLocationRelativeTo(null);
-			reportFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			reportFrame.setVisible(true);
+			clsEmployeeUI frame = new clsEmployeeUI();
+			frame.setSize(400, 350);
+			frame.setResizable(false);
+			frame.setLocationRelativeTo(null);
+			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			frame.setVisible(true);
 			
 			clsMain.this.dispose();
 		}

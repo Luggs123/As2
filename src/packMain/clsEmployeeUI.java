@@ -1,6 +1,5 @@
 package packMain;
 
-import java.awt.Component;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -103,14 +102,17 @@ public class clsEmployeeUI extends JFrame implements interfaceMain {
 						if (year % 4 != 0) 
 						{
 							break;
-						} else if (year % 100 != 0)
+						}
+						else if (year % 100 != 0)
 						{
 							maxDays += 1;
 							break;
-						} else if (year % 400 != 0)
+						}
+						else if (year % 400 != 0)
 						{
 							break;
-						} else
+						}
+						else
 						{
 							maxDays += 1;
 							break;
@@ -138,26 +140,24 @@ public class clsEmployeeUI extends JFrame implements interfaceMain {
 				default: maxDays = 31;
 				}
 				
-				if (day < 0 || day > maxDays)
+				if (day <= 0 || day > maxDays)
 				{
 					JOptionPane.showMessageDialog(null, "Please enter a valid day value for this month.", "Input Error", JOptionPane.ERROR_MESSAGE);
 					return;
 				}
 				
 				employeeInfo = new clsEmployee(ID, name, new GregorianCalendar(year, month, day));
+				
+				clsReport reportFrame = new clsReport();
+				reportFrame.setSize(700, 410);
+				reportFrame.setResizable(false);
+				reportFrame.setLocationRelativeTo(null);
+				reportFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				reportFrame.setVisible(true);
+				
 				clsEmployeeUI.this.dispose();
 			}
 		});
 		panel.add(btnDone);
-	}
-	
-	public static void main(String[] args) 
-	{
-		clsEmployeeUI frame = new clsEmployeeUI();
-		frame.setSize(400, 350);
-		frame.setResizable(false);
-		frame.setLocationRelativeTo(null);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setVisible(true);
 	}
 }

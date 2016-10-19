@@ -20,7 +20,7 @@ public class clsReport extends JFrame implements interfaceMain
 	clsEmployee employeeInfo = clsEmployeeUI.employeeInfo;
 	
 	protected Object[][] tableInventory;
-	protected int unitTotals = NUM_0;
+	protected float unitTotals = NUM_0;
 	
 	public clsReport()
 	{
