@@ -1,8 +1,8 @@
 /*** Program Function; To accept an input of information about units stored in a warehouse,
  *** then display them in a table by unit price.
  *** Creator; Paul Gaudnik, Mark Jarjour, Michael Luger
- *** Submission Date; October 10th, 2016
- *** Date Last Modified; October 10th, 2016
+ *** Submission Date; October 20th, 2016
+ *** Date Last Modified; October 19th, 2016
  ***/
 
 package packMain;
