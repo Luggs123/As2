@@ -4,7 +4,9 @@ import java.awt.GridLayout;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Map;
+import java.util.Set;
 import java.util.TreeMap;
+import java.util.TreeSet;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -35,24 +37,26 @@ public class clsReport extends JFrame implements interfaceMain
 
 		JPanel panel = new JPanel();
 		getContentPane().add(panel);
-
+		Set<clsUnit> entries = new TreeSet<clsUnit>(unitMap.values());
 		// Convert map of unit entries into a two-dimensional string.
 		tableInventory = new Object[unitMap.entrySet().size()][6];
 		int entryNum = NUM_0;
-		for (Map.Entry<Integer, clsUnit> entry : unitMap.entrySet())
+		
+		
+		for (clsUnit entry : entries)
 		{
-			tableInventory[entryNum][0] = entry.getKey();
-			tableInventory[entryNum][1] = entry.getValue().getItemDsc();
-			tableInventory[entryNum][2] = entry.getValue().getQtyOnHand();
-			tableInventory[entryNum][3] = entry.getValue().getCadPrice();
-			tableInventory[entryNum][4] = entry.getValue().getWarehouseCity();
-			tableInventory[entryNum][5] = entry.getValue().getTotalPrice();
+			tableInventory[entryNum][0] = entry.getID();
+			tableInventory[entryNum][1] = entry.getItemDsc();
+			tableInventory[entryNum][2] = entry.getQtyOnHand();
+			tableInventory[entryNum][3] = entry.getCadPrice();
+			tableInventory[entryNum][4] = entry.getWarehouseCity();
+			tableInventory[entryNum][5] = entry.getTotalPrice(); 
 
 			if (tableInventory[entryNum][4] == "Montreal")
 			{
-				montrealTotals += entry.getValue().getTotalPrice();
+				montrealTotals += entry.getTotalPrice();
 			}
-			unitTotals += entry.getValue().getTotalPrice();
+			unitTotals += entry.getTotalPrice();
 
 			// Adding decimal values to Unit Price and total to columns.
 			tableInventory[entryNum][3] = String.format("$%.2f", tableInventory[entryNum][3]);
