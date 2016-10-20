@@ -33,7 +33,9 @@ public class clsReport extends JFrame implements interfaceMain
 	{
 		setTitle("Yearly Inventory Report");
 		getContentPane().setLayout(new GridLayout(0, 1, 0, 0));
+		
 		JPanel panel = new JPanel();
+		panel.setLayout(null);
 		getContentPane().add(panel);
 
 		// Convert map of unit entries into a two-dimensional string.
@@ -64,7 +66,6 @@ public class clsReport extends JFrame implements interfaceMain
 		}
 
 		String[] columnNames = {"Unit ID", "Description", "Qty On Hand", "Unit Price", "Warehouse City", "Total (CAD)"};
-		panel.setLayout(null);
 
 		JTable inventoryReport = new JTable(tableInventory, columnNames);
 		inventoryReport.setEnabled(false);
@@ -86,12 +87,12 @@ public class clsReport extends JFrame implements interfaceMain
 		panel.add(lblNewLabel);
 
 		JLabel lblHighestTotalCAD = new JLabel("Highest Total Amount (in CAD):");
-		lblHighestTotalCAD.setBounds(57, 386, 198, 16);
+		lblHighestTotalCAD.setBounds(57, 386, 209, 16);
 		panel.add(lblHighestTotalCAD);
 
 		JLabel lblUnitDescription = new JLabel("Unit ID              Description         Qty On Hand          Unit Price"
 				+ "          WarehouseCity     Total (CAD)");
-		lblUnitDescription.setBounds(57, 412, 600, 16);
+		lblUnitDescription.setBounds(57, 412, 632, 16);
 		panel.add(lblUnitDescription);
 
 		JLabel lblMaxUnitDetails = new JLabel(String.format("%-20d %-17s %-20d %-19.2f %-17s %-11.2f", maxUnit.getID(),
@@ -124,14 +125,14 @@ public class clsReport extends JFrame implements interfaceMain
 			{
 				if (c1.getTotalPrice() > c2.getTotalPrice())
 				{
-					return 1;
+					return NUM_1;
 				}
 				else if (c1.getTotalPrice() < c2.getTotalPrice())
 				{
 					return -1;
 				}
 				else {
-					return 0;
+					return NUM_0;
 				}
 			}
 		};
@@ -147,8 +148,10 @@ public class clsReport extends JFrame implements interfaceMain
 				return map.get(k1).compareTo(map.get(k2));
 			}
 		};
+		
 		Map<K, V> sortedByValues = new TreeMap<K, V>(valueComparator);
 		sortedByValues.putAll(map);
+		
 		return sortedByValues;
 	}
 }

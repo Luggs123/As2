@@ -85,9 +85,9 @@ public class clsUnit implements interfaceMain, Comparable<clsUnit>
 	@Override
 	public int compareTo(clsUnit o) 
 	{
-		if (this.getCadPrice() > o.getCadPrice()) { return 1; }
+		if (this.getCadPrice() > o.getCadPrice()) { return NUM_1; }
 		else if (this.getCadPrice() < o.getCadPrice()) { return -1; }
-		else { return 0; }
+		else { return NUM_0; }
 	}
 
 }

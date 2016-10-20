@@ -14,7 +14,8 @@ import javax.swing.JTextField;
 
 import packEmployee.clsEmployee;
 
-public class clsEmployeeUI extends JFrame implements interfaceMain {
+public class clsEmployeeUI extends JFrame implements interfaceMain
+{
 
 	private static final long serialVersionUID = -483865508050000337L;
 	private JTextField txtId;
@@ -28,6 +29,7 @@ public class clsEmployeeUI extends JFrame implements interfaceMain {
 	{
 		setTitle("Enter Employee Info");
 		getContentPane().setLayout(null);
+		
 		JPanel panel = new JPanel();
 		panel.setBounds(0, 0, 382, 303);
 		getContentPane().add(panel);
@@ -75,7 +77,8 @@ public class clsEmployeeUI extends JFrame implements interfaceMain {
 		btnDone.addActionListener(new ActionListener()
 		{ // Inline listener to verify inputed information and generate the report frame.
 			@Override
-			public void actionPerformed(ActionEvent e) {
+			public void actionPerformed(ActionEvent e)
+			{
 				if (clsMain.catchNumberFormatError(txtId, "Please enter a positive integer for the ID.") ||
 						clsMain.catchNumberFormatError(txtDay, "Please enter a proper day of this month.") ||
 						clsMain.catchNumberFormatError(txtMonth, "Please enter an integer from 1 to 12.") ||
@@ -91,7 +94,8 @@ public class clsEmployeeUI extends JFrame implements interfaceMain {
 				int year = Integer.parseInt(txtYear.getText());
 				int maxDays;
 
-				if (month <= 0 || month > 12) {
+				if (month <= NUM_0 || month > 12)
+				{
 					JOptionPane.showMessageDialog(null, "Please enter a month, from 1 to 12.", "Input Error", JOptionPane.ERROR_MESSAGE);
 					return;
 				}
@@ -102,22 +106,22 @@ public class clsEmployeeUI extends JFrame implements interfaceMain {
 				case 1: maxDays = JAN;
 						break;
 				case 2: maxDays = FEB;
-						if (year % 4 != 0)
+						if (year % 4 != NUM_0)
 						{
 							break;
 						}
-						else if (year % 100 != 0)
+						else if (year % NUM_100 != NUM_0)
 						{
-							maxDays += 1;
+							maxDays++;
 							break;
 						}
-						else if (year % 400 != 0)
+						else if (year % 400 != NUM_0)
 						{
 							break;
 						}
 						else
 						{
-							maxDays += 1;
+							maxDays++;
 							break;
 						}
 				case 3: maxDays = MAR;
@@ -143,7 +147,7 @@ public class clsEmployeeUI extends JFrame implements interfaceMain {
 				default: maxDays = 31;
 				}
 
-				if (day <= 0 || day > maxDays)
+				if (day <= NUM_0 || day > maxDays)
 				{
 					JOptionPane.showMessageDialog(null, "Please enter a valid day value for this month.", "Input Error", JOptionPane.ERROR_MESSAGE);
 					return;
@@ -151,13 +155,14 @@ public class clsEmployeeUI extends JFrame implements interfaceMain {
 
 				employeeInfo = new clsEmployee(ID, name, new GregorianCalendar(year, month, day));
 
-				// Kill employee frame and draw report.
-				clsReport reportFrame = new clsReport();
-				reportFrame.setSize(750, 600);
-				reportFrame.setResizable(false);
-				reportFrame.setLocationRelativeTo(null);
-				reportFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-				reportFrame.setVisible(true);
+				// Kill employee frame and draw the unit frame.
+				clsMain frame = new clsMain();
+				clsMain.rdbtnMontreal.doClick();
+				frame.setSize(600, 350);
+				frame.setResizable(false);
+				frame.setLocationRelativeTo(null);
+				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				frame.setVisible(true);
 
 				clsEmployeeUI.this.dispose();
 			}

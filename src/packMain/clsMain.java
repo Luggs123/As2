@@ -9,7 +9,6 @@ package packMain;
 
 import packUnit.clsUnit;
 
-import java.util.Comparator;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -220,7 +219,7 @@ public class clsMain extends JFrame implements interfaceMain
 					// Display unit info and disable text fields.
 					descField.setText(map.getValue().getItemDsc());
 					qtyField.setText(Integer.toString(map.getValue().getQtyOnHand()));
-					cadField.setText(Float.toString((float) (Math.round(map.getValue().getCadPrice() * NUM_100) / NUM_100))); // Round price because float.
+					cadField.setText(Float.toString((float) (Math.round(map.getValue().getCadPrice() * NUM_100) / NUM_100))); // Round price to 2 decimal points because float.
 
 					rdbtnMontreal.doClick();
 					viewMode(true); // Disables text field editing and button usage.
@@ -326,23 +325,22 @@ public class clsMain extends JFrame implements interfaceMain
 		@Override
 		public void actionPerformed(ActionEvent e)
 		{
-			// Draw employee frame.
-			clsEmployeeUI frame = new clsEmployeeUI();
-			frame.setSize(400, 350);
-			frame.setResizable(false);
-			frame.setLocationRelativeTo(null);
-			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			frame.setVisible(true);
+			// Draw report frame.
+			clsReport reportFrame = new clsReport();
+			reportFrame.setSize(750, 600);
+			reportFrame.setResizable(false);
+			reportFrame.setLocationRelativeTo(null);
+			reportFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			reportFrame.setVisible(true);
 
 			clsMain.this.dispose(); // Kills the unit input frame.
 		}
 	}
-
+	
 	public static void main(String[] args)
 	{
-		clsMain frame = new clsMain();
-		rdbtnMontreal.doClick();
-		frame.setSize(600, 350);
+		clsEmployeeUI frame = new clsEmployeeUI();
+		frame.setSize(400, 350);
 		frame.setResizable(false);
 		frame.setLocationRelativeTo(null);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
