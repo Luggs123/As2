@@ -38,7 +38,8 @@ public class clsUnit implements interfaceMain, Comparable<clsUnit>
 
 	public clsUnit(int ID, float localPrice, String warehouseCity, int qtyOnHand, String itemDsc)
 	{
-		this.localPrice = localPrice;
+		this.ID = ID;
+                this.localPrice = localPrice;
 		this.warehouseCity = warehouseCity;
 		this.qtyOnHand = qtyOnHand;
 		this.itemDsc = itemDsc;

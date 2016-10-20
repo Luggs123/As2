@@ -108,7 +108,7 @@ public class clsReport extends JFrame implements interfaceMain
 		lblMinUnitDetails.setBounds(57, 487, 600, 16);
 		panel.add(lblMinUnitDetails);
 
-		JLabel lblTotalAmountIn = new JLabel(String.format("Total Amount in the Warehouse of Montreal (in CAD):  + %.2f", montrealTotals));
+		JLabel lblTotalAmountIn = new JLabel(String.format("Total Amount in the Warehouse of Montreal (in CAD):  $ %.2f", montrealTotals));
 		lblTotalAmountIn.setBounds(57, 516, 506, 16);
 		panel.add(lblTotalAmountIn);
 	}
