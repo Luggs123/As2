@@ -16,18 +16,18 @@ public class clsUnit implements interfaceMain, Comparable<clsUnit>
 	{
 		switch (warehouseCity.toLowerCase())
 		{
-			case "new york":
-			{
-				return (float) (USD_CAN * localPrice);
-			}
-			case "barcelona":
-			{
-				return (float) (EUR_CAN * localPrice);
-			}
-			default: 
-			{
-				return localPrice;
-			}
+		case "new york":
+		{
+			return (float) (USD_CAN * localPrice);
+		}
+		case "barcelona":
+		{
+			return (float) (EUR_CAN * localPrice);
+		}
+		default: 
+		{
+			return localPrice;
+		}
 		}
 	}
 
@@ -39,7 +39,7 @@ public class clsUnit implements interfaceMain, Comparable<clsUnit>
 	public clsUnit(int ID, float localPrice, String warehouseCity, int qtyOnHand, String itemDsc)
 	{
 		this.ID = ID;
-                this.localPrice = localPrice;
+		this.localPrice = localPrice;
 		this.warehouseCity = warehouseCity;
 		this.qtyOnHand = qtyOnHand;
 		this.itemDsc = itemDsc;
@@ -51,7 +51,7 @@ public class clsUnit implements interfaceMain, Comparable<clsUnit>
 	{
 		return ID;
 	}
-	
+
 	public double getLocalPrice()
 	{
 		return localPrice;
