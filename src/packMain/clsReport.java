@@ -33,15 +33,13 @@ public class clsReport extends JFrame implements interfaceMain
 	{
 		setTitle("Yearly Inventory Report");
 		getContentPane().setLayout(new GridLayout(0, 1, 0, 0));
-		setSize(750, 600);
-
 		JPanel panel = new JPanel();
 		getContentPane().add(panel);
-		Set<clsUnit> entries = new TreeSet<clsUnit>(unitMap.values());
+
 		// Convert map of unit entries into a two-dimensional string.
+		Set<clsUnit> entries = new TreeSet<clsUnit>(unitMap.values());
 		tableInventory = new Object[unitMap.entrySet().size()][6];
 		int entryNum = NUM_0;
-		
 		
 		for (clsUnit entry : entries)
 		{
