@@ -256,7 +256,7 @@ public class clsMain extends JFrame implements interfaceMain
 
 	}
 
-	// Searches for and displays the unit based on the ID, if it exists.
+	// Appends the current unit information to the map, if it is valid.
 	class btnListenerMORE implements ActionListener
 	{
 		public void actionPerformed(ActionEvent e)
