@@ -1,10 +1,11 @@
-package packMain;
-// TODO: Write program function.
-/*** Program Function;
+/*** Program Function; To accept an input of information about units stored in a warehouse,
+ *** then display them in a table by unit price.
  *** Creator; Paul Gaudnik, Mark Jarjour, Michael Luger
  *** Submission Date; October 10th, 2016
  *** Date Last Modified; October 10th, 2016
  ***/
+
+package packMain;
 
 import packUnit.clsUnit;
 
@@ -168,7 +169,7 @@ public class clsMain extends JFrame implements interfaceMain
 					eurField.setEditable(false);
 					break;
 				}
-	
+
 				case "usd":
 				{
 					cadField.setEditable(false);
@@ -176,7 +177,7 @@ public class clsMain extends JFrame implements interfaceMain
 					eurField.setEditable(false);
 					break;
 				}
-	
+
 				case "eur":
 				{
 					cadField.setEditable(false);
@@ -189,7 +190,8 @@ public class clsMain extends JFrame implements interfaceMain
 
 	}
 
-	class btnListenerCLEAR implements ActionListener // Clears text fields.
+	// Clears text fields.
+	class btnListenerCLEAR implements ActionListener
 	{
 		public void actionPerformed(ActionEvent e)
 		{
@@ -202,7 +204,8 @@ public class clsMain extends JFrame implements interfaceMain
 		}
 	}
 
-	class btnListenerSEARCH implements ActionListener // Searches for and displays the unit based on the ID, if it exists.
+	// Searches for and displays the unit based on the ID, if it exists.
+	class btnListenerSEARCH implements ActionListener
 	{
 		public void actionPerformed(ActionEvent e)
 		{
@@ -220,7 +223,7 @@ public class clsMain extends JFrame implements interfaceMain
 					cadField.setText(Float.toString((float) (Math.round(map.getValue().getCadPrice() * NUM_100) / NUM_100))); // Round price because float.
 
 					rdbtnMontreal.doClick();
-					viewMode(true);
+					viewMode(true); // Disables text field editing and button usage.
 					return;
 				}
 			}
@@ -230,7 +233,8 @@ public class clsMain extends JFrame implements interfaceMain
 		}
 	}
 
-	class btnListenerEDIT implements ActionListener // Lets the user edit the unit found with "Search by ID".
+	// Lets the user edit the information related to the unit found with "Search by ID".
+	class btnListenerEDIT implements ActionListener
 	{
 		public void actionPerformed(ActionEvent e)
 		{
@@ -239,7 +243,8 @@ public class clsMain extends JFrame implements interfaceMain
 
 	}
 
-	class btnListenerDELETE implements ActionListener // Lets the user remove the unit found with "Search by ID" from the database.
+	// Lets the user remove the unit found with "Search by ID" from the database.
+	class btnListenerDELETE implements ActionListener
 	{
 		public void actionPerformed(ActionEvent e)
 		{
@@ -251,7 +256,8 @@ public class clsMain extends JFrame implements interfaceMain
 
 	}
 
-	class btnListenerMORE implements ActionListener // Searches for and displays the unit based on the ID, if it exists.
+	// Searches for and displays the unit based on the ID, if it exists.
+	class btnListenerMORE implements ActionListener
 	{
 		public void actionPerformed(ActionEvent e)
 		{
@@ -313,21 +319,22 @@ public class clsMain extends JFrame implements interfaceMain
 			btnClear.doClick();
 		}
 	}
-	
-	class btnListenerDONE implements ActionListener // Kills the current frame and generates the report frame.
+
+	// Kills the current frame and generates the employee frame.
+	class btnListenerDONE implements ActionListener
 	{
 		@Override
-		public void actionPerformed(ActionEvent e) 
+		public void actionPerformed(ActionEvent e)
 		{
-			// Draw report frame.
+			// Draw employee frame.
 			clsEmployeeUI frame = new clsEmployeeUI();
 			frame.setSize(400, 350);
 			frame.setResizable(false);
 			frame.setLocationRelativeTo(null);
 			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			frame.setVisible(true);
-			
-			clsMain.this.dispose();
+
+			clsMain.this.dispose(); // Kills the unit input frame.
 		}
 	}
 
@@ -342,7 +349,7 @@ public class clsMain extends JFrame implements interfaceMain
 		frame.setVisible(true);
 	}
 
-	// Function used for catching errors involving incorrect data being inputed into text fields.
+	// Function used for catching errors. Returns true if the text field is not parsable as an integer.
 	public static Boolean catchNumberFormatError(JTextField textfield, String errorMessage)
 	{
 		try
@@ -361,7 +368,7 @@ public class clsMain extends JFrame implements interfaceMain
 		return false;
 	}
 
-	// Variant of the previous function for floats.
+	// Variant of the previous function used for floats.
 	public static Boolean catchNumberFormatError(JTextField textfield, String errorMessage, Boolean isFloat)
 	{
 		try
@@ -380,7 +387,8 @@ public class clsMain extends JFrame implements interfaceMain
 		return false;
 	}
 
-	// Toggles whether the buttons and text fields are usable.
+	// Toggles whether the buttons and text fields are enabled. Used when the user is viewing the information for
+	// a unit they searched for.
 	public static void viewMode(Boolean enable)
 	{
 		rdbtnMontreal.setEnabled(!enable);
@@ -391,7 +399,7 @@ public class clsMain extends JFrame implements interfaceMain
 		descField.setEditable(!enable);
 		qtyField.setEditable(!enable);
 
-		// Toggle buttons so that "Edit" and "Delete" are always in the opposite state.
+		// Toggle buttons so that "Edit" and "Delete" are always in the opposite state inputed.
 		btnClear.setEnabled(!enable);
 		btnEdit.setEnabled(enable);
 		btnDelete.setEnabled(enable);

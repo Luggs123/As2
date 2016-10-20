@@ -1,17 +1,18 @@
 package packMain;
-// TODO: Add all constants here.
+
 public interface interfaceMain
 {
 	// Constants.
 	final String EMPTY_STR = "";
-	
+
 	final byte NUM_0 = 0;
-	final float NUM_100 = 100f;
-	
+	final float NUM_100 = 100f; // Casted as a float for rounding purposes in clsMain.
+
 	final double USD_CAN = 1.0 / 0.76;
 	final double EUR_CAN = 1.0 / 0.67;
 	final float CAN_CAN = 1.f;
-	
+
+	// Dates for validating the employee input.
 	final int JAN = 31;
 	final int FEB = 28;
 	final int MAR = 31;
