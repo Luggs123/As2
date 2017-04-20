@@ -28,7 +28,7 @@ import javax.swing.JTextField;
 public class clsMain extends JFrame implements interfaceMain
 {
 	private static final long serialVersionUID = -1784204695438064302L;
-	static Map<Integer, clsUnit> unitMap = new TreeMap<>();
+	protected static Map<Integer, clsUnit> unitMap = new TreeMap<>();
 
 	// Text fields.
 	static JTextField unitIDField;
@@ -347,43 +347,47 @@ public class clsMain extends JFrame implements interfaceMain
 		frame.setVisible(true);
 	}
 
-	// Function used for catching errors. Returns true if the text field is not parsable as an integer.
-	public static Boolean catchNumberFormatError(JTextField textfield, String errorMessage)
+// Function used for catching errors. Returns true if the text field is not parsable as an integer.
+public static Boolean catchNumberFormatError(JTextField textfield, String errorMessage)
+{
+	try
 	{
-		try
-		{
-			// Parse text field.
+		// Parse text field.
+		Integer.parseInt(textfield.getText());
+	}
+
+	catch (NumberFormatException nfe)
+	{
+		// If an error is caught then throw an error dialog.
+		JOptionPane.showMessageDialog(null, errorMessage, "Input Error", JOptionPane.ERROR_MESSAGE);
+		return true;
+	}
+
+	return false;
+}
+
+// Variant of the previous function used for floats.
+public static Boolean catchNumberFormatError(JTextField textfield, String errorMessage, Boolean isFloat)
+{
+	try
+	{
+		// Parse text field.
+		if (isFloat) {
+			Float.parseFloat(textfield.getText());
+		} else {
 			Integer.parseInt(textfield.getText());
 		}
-
-		catch (NumberFormatException nfe)
-		{
-			// If an error is caught then throw an error dialog.
-			JOptionPane.showMessageDialog(null, errorMessage, "Input Error", JOptionPane.ERROR_MESSAGE);
-			return true;
-		}
-
-		return false;
 	}
 
-	// Variant of the previous function used for floats.
-	public static Boolean catchNumberFormatError(JTextField textfield, String errorMessage, Boolean isFloat)
+	catch (NumberFormatException nfe)
 	{
-		try
-		{
-			// Parse text field.
-			Float.parseFloat(textfield.getText());
-		}
-
-		catch (NumberFormatException nfe)
-		{
-			// If an error is caught then throw an error dialog.
-			JOptionPane.showMessageDialog(null, errorMessage, "Input Error", JOptionPane.ERROR_MESSAGE);
-			return true;
-		}
-
-		return false;
+		// If an error is caught then throw an error dialog.
+		JOptionPane.showMessageDialog(null, errorMessage, "Input Error", JOptionPane.ERROR_MESSAGE);
+		return true;
 	}
+
+	return false;
+}
 
 	// Toggles whether the buttons and text fields are enabled. Used when the user is viewing the information for
 	// a unit they searched for.
